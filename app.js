@@ -40,4 +40,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const mongoURI = 'mongodb+srv://dhernqvist:Lorien1986@memeit-lkmkp.mongodb.net/test?retryWrites=true&w=majority'
+
+mongoose.connect(mongoURI);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 module.exports = app;
