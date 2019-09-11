@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -12,5 +12,35 @@ main {
 }
 
 form {
+  margin-top: 100px;
+  margin-left: 50px;
   max-width: 20em;
 }
+
+.navbarlogo {
+  height: 10%;
+  width: 10%;
+}
+
+.logo {
+  height: 70%;
+  width: 70%;
+}
+
+/* .navbarlogo {
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  display:flex;
+  flex-direction: column;
+  justify-content: START;
+  text-align: right;
+  background-color: orange;
+  border-radius: 10px;
+}
+
+.navbarlogo > h4 {
+  font-size: 16px;
+  margin-top: auto;
+  margin: auto 0 0 0;
+} */
