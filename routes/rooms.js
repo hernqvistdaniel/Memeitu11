@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 
 // NEW ROOM FORM
 router.get('/new', auth.requireLogin, (req, res, next) => {
-  // IMPLEMENT
+  res.render('rooms/new');
 });
 
 // SHOW SPECIFIC ROOM
