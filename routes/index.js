@@ -2,9 +2,18 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
+// SET LAYOUT VARIABLES
+router.use(function(req, res, next) {
+  res.locals.title = "MemeIt!";
+  res.locals.currentUserId = req.session.userId;
+
+  next();
+});
+
 // GET HOMEPAGE
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'MemeIt!' });
+  const currentUserId = req.session.userId;
+  res.render('index');
 });
 
 // GET LOGIN SCREEN

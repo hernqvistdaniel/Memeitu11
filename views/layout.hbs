@@ -19,7 +19,11 @@
       MemeIt!
     </div>
     <div class="navbar-text">
-      login / logout
+      {{# if currentUserId}}
+        <a class="nav-link" href="/logout">Logout</a>
+      {{else}}
+        <a class="nav-link" href="/login">Login</a>
+      {{/if}}
     </div>
   </nav>
 
