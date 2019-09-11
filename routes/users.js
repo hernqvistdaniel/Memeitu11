@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const auth = require('./helpers/auth');
 
 // USERS get all
-router.get('/', (req, res, next) => {
+router.get('/', auth.requireLogin, (req, res, next) => {
   User.find({}, 'username', (err, users) => {
     if (err) {
       console.log(`Couldn't find any users ${err}`);
