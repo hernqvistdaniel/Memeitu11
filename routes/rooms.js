@@ -6,7 +6,13 @@ const Room = require('../models/Room');
 
 // INDEX ROOMS
 router.get('/', (req, res, next) => {
-  // IMPLEMENT
+  Room.find({}, 'topic', function(err, rooms) {
+    if(err) {
+      console.error(err);
+    } else {
+      res.render('rooms/index', { rooms: rooms });
+    }
+  });
 });
 
 // NEW ROOM FORM
