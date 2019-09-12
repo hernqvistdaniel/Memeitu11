@@ -6,7 +6,17 @@ const PostSchema = new Schema({
   body: String,
   room: {
     type: Schema.Types.ObjectID, ref: 'Room'
-  }
+  },
+  points: {
+    type: Number,
+    default: 0
+  },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
+  ]
 });
 
 module.exports = mongoose.model('Post', PostSchema);
