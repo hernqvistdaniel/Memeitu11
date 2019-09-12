@@ -3,6 +3,7 @@ const router = express.Router({ mergeParams: true });
 const auth = require('./helpers/auth');
 const Room = require('../models/Room');
 const Post = require('../models/Post');
+const commentsRouter = require('./comments');
 
 // NEW POST
 router.get('/new', auth.requireLogin, (req, res, next) => {
