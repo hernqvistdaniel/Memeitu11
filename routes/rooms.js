@@ -3,6 +3,10 @@ const router = express.Router();
 
 const auth = require('./helpers/auth');
 const Room = require('../models/Room');
+const Post = require('../models/Post');
+
+// REQUIRE FOR NESTING <--
+const posts = require('./posts');
 
 // INDEX ROOMS
 router.get('/', (req, res, next) => {
@@ -25,7 +29,11 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.id, function(err, room) {
     if(err) { res.render('rooms/noroom') };
 
-    res.render('rooms/show', { room: room });
+    Post.find({ room: room}, function(err, posts) {
+      if(err) { console.error(err) };
+
+      res.render('rooms/show', { room: room, posts: posts });
+    });
   });
 });
 
@@ -58,5 +66,8 @@ router.post('/', auth.requireLogin, (req, res, next) => {
     return res.redirect('/rooms');
   });
 });
+
+// NEST HERE <--
+router.use('/:roomId/posts', posts);
 
 module.exports = router;

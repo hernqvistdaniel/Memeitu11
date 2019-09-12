@@ -5,7 +5,7 @@ const PostSchema = new Schema({
   subject: String,
   body: String,
   room: {
-    type: Schema.TypesObjectID, ref: 'Room'
+    type: Schema.Types.ObjectID, ref: 'Room'
   }
 });
 
