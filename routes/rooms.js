@@ -31,12 +31,20 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
 
 // EDIT ROOM
 router.get('/:id/edit', auth.requireLogin, (req, res, next) => {
-  // IMPLEMENT
+  Room.findById(req.params.id, function(err, room) {
+    if(err) { res.render('rooms/noroom') };
+
+    res.render('rooms/edit', { room: room });
+  });
 });
 
 // UPDATE ROOM
 router.post('/:id', auth.requireLogin, (req, res, next) => {
-  // IMPLEMENT
+  Room.findByIdAndUpdate(req.params.id, req.body, function(err, room) {
+    if(err) { res.render('rooms/noroom') };
+
+    res.redirect('/rooms/' + req.params.id);
+  });
 });
 
 // CREATE ROOM

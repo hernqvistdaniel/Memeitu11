@@ -1,0 +1,14 @@
+<div>
+  <form action="/rooms/{{room.id}}" method="post">
+    <legend>Edit Topic!</legend>
+
+    <div class="form-group">
+      <label for="post-topic">Topic:</label>
+      <input type="text" name="topic" class="form-control" id="room-topic" value="{{room.topic}}">
+    </div>
+
+    <div class="text-right">
+      <button type="submit" class="btn btn-success">Update!</button>
+    </div>
+  </form>
+</div>
