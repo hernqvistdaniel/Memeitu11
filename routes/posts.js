@@ -29,4 +29,6 @@ router.post('/', auth.requireLogin, (req, res, next) => {
   });
 });
 
+router.use('/:postId/comments', commentsRouter);
+
 module.exports = router;
