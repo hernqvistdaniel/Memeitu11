@@ -22,7 +22,11 @@ router.get('/new', auth.requireLogin, (req, res, next) => {
 
 // SHOW SPECIFIC ROOM
 router.get('/:id', auth.requireLogin, (req, res, next) => {
-  // IMPLEMENT
+  Room.findById(req.params.id, function(err, room) {
+    if(err) { res.render('rooms/noroom') };
+
+    res.render('rooms/show', { room: room });
+  });
 });
 
 // EDIT ROOM
