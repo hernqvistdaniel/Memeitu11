@@ -29,10 +29,10 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.id, function(err, room) {
     if(err) { res.render('rooms/noroom') };
 
-    Post.find({ room: room }).populate('comments').exec(function(err, posts) {
+    Post.find({ room: room }).sort({ points: -1 }).populate('comments').exec(function(err, posts) {
       if(err) { console.error(err) };
 
-      res.render('rooms/show', { room: room, posts: posts });
+      res.render('rooms/show', { room: room, posts: posts, roomId: req.params.id });
     });
   });
 });
