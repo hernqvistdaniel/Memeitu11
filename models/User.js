@@ -24,7 +24,7 @@ const UserSchema = new Schema({
     type: String
   },
   createdAt: {
-    type: Date
+    type: String
   }
 });
 

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const auth = require("./helpers/auth");
+const moment = require('moment');
 
 // USERS get all
 router.get("/", auth.requireLogin, (req, res, next) => {
@@ -31,7 +32,7 @@ router.get("/profile", auth.requireLogin, (req, res, next) => {
 
 // PROFILE EDIT VIEW
 router.get("/profile-edit", auth.requireLogin, (req, res, next) => {
-  User.find({ _id: req.session.userId }, function(err, user) {
+  User.findById({ _id: req.session.userId }, function(err, user) {
     if (err) {
       console.error(err);
     }
@@ -48,7 +49,7 @@ router.post("/profile-edit", auth.requireLogin, (req, res, next) => {
     if (err) {
       console.error(err);
     }
-    res.render("users/profile-edit", { user: user });
+    res.redirect("/users/profile/");
   });
 });
 
@@ -61,7 +62,7 @@ router.post("/", (req, res, next) => {
 
   user.save((err, user) => {
     if (err) console.log(`There was a problem creating a new user: ${err}`);
-    return res.redirect("/users");
+    return res.redirect("/login");
   });
 });
 
