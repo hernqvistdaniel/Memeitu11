@@ -1,19 +1,29 @@
-<div class="mt-5">
+<div class="mt-5 mb-3">
   <h2>Pick a Room!</h2>
 </div>
 
 <div class="mb-5">
-    {{#each rooms as |room|}}
-    <h5 class="mt-4">
-      <a href="/rooms/{{room.id}}">{{room.topic}}</a> | <a href="/rooms/{{room.id}}/edit"><img class="cog" src="/images/logos/cog.png"></a>
-      
-    </h5>
-    {{/each}}
-        <b><p class="mt-5">Or create a new one <a href="/rooms/new"><u>here!</u></a></p></b>
+  <ul class="list-group col-md-4">
+  {{#each rooms as |room|}}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span><a href="/rooms/{{room.id}}">{{room.topic}}</a></span><span class="badge badge-success badge-pill">Edit</span></a>
+  </li>
+  {{/each}}
+  </ul>
+
+  <b>
+    <p class="mt-5">Or create a new one <a href="/rooms/new"><u>here!</u></a></p>
+  </b>
+
 </div>
 <div>
   <h4 class="mt-5 mb-3">Top comments:</h4>
-  {{#each posts as |post|}}
-      <p><b>"{{post.subject}}"</b> {{post.points}} points</p>
-      {{/each}}
-  </div>
+  <ul class="list-group col-md-4">
+    {{#each posts as |post|}}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{post.subject}}
+      <span class="badge badge-primary badge-pill">{{post.points}}</span>
+    </li>
+    {{/each}}
+  </ul>
+</div>

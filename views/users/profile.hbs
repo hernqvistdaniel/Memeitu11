@@ -1,8 +1,8 @@
-<div>
-  <h3> {{user.username}}</h3>
+<div class="card-body">
+  <h3 class="card-title mb-4"> {{user.username}}</h3>
   <p>Name:{{user.firstName}} {{user.lastName}}</p>
   <p>From: {{user.location}}</p>
-  <p>FB: {{user.facebook}}</p>
+  <p>FB: <a href="{{user.facebook}}" target="_blank">Link</a></p>
   <p>Member since: {{user.createdAt}}</p>
-  <p><a href="/users/profile-edit">Edit</a></p>
+  <p><button class="btn btn-primary btn-sm"><a href="/users/profile-edit">Edit</a></button></p>
 </div>

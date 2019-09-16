@@ -9,40 +9,42 @@
   <div class="col-8">
     {{#each posts as |post|}}
     <div class="card mb-3 mt-5">
-      <div class="card-body">
+      <div class="card-header">
         <h3 class="card-title text-center">{{post.subject}}</h3>
         <p class="text-center"><i>Author: {{post.author}}</i></p>
-        <p class="text-center mb-5"><i>{{post.createdAt}}</i></p>
+        <p class="text-center"><i>{{post.createdAt}}</i></p>
+      </div>
+      <div class="card-body">
         <p>{{post.body}}</p>
         <img src="{{post.img}}" width="200" />
         <hr>
-        <p><a href="{{post.link}}">{{post.link}}</a></p>
+        <p><a href="{{post.link}}" target="_blank">{{post.link}}</a></p>
       </div>
 
       <div class="card-footer text-muted text-right">
 
         <div class="btn-group btn-group-sm footerBtns">
-          <h3 class="points-span mr-3">{{post.points}} points </h3>
+          <h4 class="points-span mr-3">{{post.points}} points </h4>
           <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
             <input type="hidden" name="points" id="post-points" value="-1">
-            <button type="submit" class="downvote-button btn btn-danger">-</button>
+            <button type="submit" class="downvote-button btn btn-sm btn-danger">-</button>
           </form>
 
           <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
             <input type="hidden" name="points" id="post-points" value="1">
-            <button type="submit" class="upvote-button btn btn-success">+</button>
+            <button type="submit" class="upvote-button btn btn-sm btn-success">+</button>
           </form>
         </div>
       </div>
     </div>
-    
+
 
 
 
 
 
     {{#each post.comments as |comment|}}
-    
+
     <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
     <p class="text-muted"><i>{{comment.createdAt}}</i></p>
     {{/each}}
@@ -56,5 +58,5 @@
 </div>
 
 <div class="row justify-content-center">
-  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success btn-lg btn-block">New Post</button></a>
+  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success btn-block">New Post</button></a>
 </div>

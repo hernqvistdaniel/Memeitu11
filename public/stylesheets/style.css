@@ -36,8 +36,8 @@ main {
 }
 
 .cog {
-  height: 1.2%;
-  width: 1.2%;
+  height: 20%;
+  width: 20%;
   transition: all .2s ease-in-out;
 }
 
