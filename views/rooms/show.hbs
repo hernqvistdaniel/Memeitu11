@@ -1,6 +1,9 @@
 <div class="row justify-content-center mt-4">
   <h1>{{room.topic}}</h1>
 </div>
+<div class="row justify-content-center mt-2">
+  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success">New Post</button></a>
+</div>
 
 <div class="row justify-content-center mt-5 makesmaller">
   <div class="col-8">
@@ -9,7 +12,7 @@
       <div class="card-body">
         <h3 class="card-title text-center">{{post.subject}}</h3>
         <p class="text-center"><i>Author: {{post.author}}</i></p>
-        <p class="text-center"><i>{{post.createdAt}}</i></p>
+        <p class="text-center mb-5"><i>{{post.createdAt}}</i></p>
         <p>{{post.body}}</p>
         <img src="{{post.img}}" width="200" />
         <hr>
@@ -40,10 +43,10 @@
 
     {{#each post.comments as |comment|}}
     
-    <p><b>{{comment.author}}:</b> {{comment.body}}</p>
+    <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
     <p class="text-muted"><i>{{comment.createdAt}}</i></p>
     {{/each}}
-    <a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new"><button class="btn btn-warning">New
+    <a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new"><button class="btn btn-primary btn-sm mb-5">New
         comment</button></a>
 
 
@@ -53,5 +56,5 @@
 </div>
 
 <div class="row justify-content-center">
-  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success">New Post</button></a>
+  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success btn-lg btn-block">New Post</button></a>
 </div>

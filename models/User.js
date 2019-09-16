@@ -10,6 +10,21 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  firstName: {
+    type: String
+  },
+  lastName: {
+    type: String
+  },
+  facebook: {
+    type: String
+  },
+  location: {
+    type: String
+  },
+  createdAt: {
+    type: Date
   }
 });
 

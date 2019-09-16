@@ -1,31 +1,67 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const User = require('../models/User');
-const auth = require('./helpers/auth');
+const User = require("../models/User");
+const auth = require("./helpers/auth");
 
 // USERS get all
-router.get('/', auth.requireLogin, (req, res, next) => {
-  User.find({}, 'username', (err, users) => {
+router.get("/", auth.requireLogin, (req, res, next) => {
+  User.find({}, "username", (err, users) => {
     if (err) {
       console.log(`Couldn't find any users ${err}`);
     } else {
-      res.render('users/index', { users: users });
+      res.render("users/index", { users: users });
     }
   });
-}); 
+});
 
 // USERS new
-router.get('/new', (req, res, next) => {
-  res.render('users/new');
+router.get("/new", (req, res, next) => {
+  res.render("users/new");
+});
+
+// PROFILE VIEW
+router.get("/profile", auth.requireLogin, (req, res, next) => {
+  User.findById({ _id: req.session.userId }, function(err, user) {
+    if (err) {
+      console.error(err);
+    }
+    res.render("users/profile", { user: user });
+  });
+});
+
+// PROFILE EDIT VIEW
+router.get("/profile-edit", auth.requireLogin, (req, res, next) => {
+  User.find({ _id: req.session.userId }, function(err, user) {
+    if (err) {
+      console.error(err);
+    }
+    res.render("users/profile-edit", { user: user });
+  });
+});
+
+// PROFILE EDIT SAVE
+router.post("/profile-edit", auth.requireLogin, (req, res, next) => {
+  User.findByIdAndUpdate({ _id: req.session.userId }, req.body, function(
+    err,
+    user
+  ) {
+    if (err) {
+      console.error(err);
+    }
+    res.render("users/profile-edit", { user: user });
+  });
 });
 
 // USERS create new
-router.post('/', (req, res, next) => {
+router.post("/", (req, res, next) => {
   const user = new User(req.body);
+
+  time = moment().format("MMMM Do YYYY, HH:mm:ss a");
+  user.createdAt = time.substr(0, 26);
 
   user.save((err, user) => {
     if (err) console.log(`There was a problem creating a new user: ${err}`);
-    return res.redirect('/users');
+    return res.redirect("/users");
   });
 });
 

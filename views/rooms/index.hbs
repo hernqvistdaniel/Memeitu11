@@ -2,11 +2,18 @@
   <h2>Pick a Room!</h2>
 </div>
 
-<div>
+<div class="mb-5">
     {{#each rooms as |room|}}
     <h5 class="mt-4">
       <a href="/rooms/{{room.id}}">{{room.topic}}</a> | <a href="/rooms/{{room.id}}/edit"><img class="cog" src="/images/logos/cog.png"></a>
+      
     </h5>
     {{/each}}
+        <b><p class="mt-5">Or create a new one <a href="/rooms/new"><u>here!</u></a></p></b>
 </div>
-    <b><p class="mt-5">Or create a new one <a href="/rooms/new"><u>here!</u></a></p></b>
+<div>
+  <h4 class="mt-5 mb-3">Top comments:</h4>
+  {{#each posts as |post|}}
+      <p><b>"{{post.subject}}"</b> {{post.points}} points</p>
+      {{/each}}
+  </div>

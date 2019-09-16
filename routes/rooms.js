@@ -11,11 +11,10 @@ const posts = require('./posts');
 // INDEX ROOMS
 router.get('/', (req, res, next) => {
   Room.find({}, 'topic', function(err, rooms) {
-    if(err) {
-      console.error(err);
-    } else {
-      res.render('rooms/index', { rooms: rooms });
-    }
+    Post.find({ room: rooms }).populate('posts').sort({ points: -1 }).exec(function(err, posts) {
+
+      res.render('rooms/index', { rooms: rooms, posts: posts });
+  });
   });
 });
 

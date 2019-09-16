@@ -1,0 +1,26 @@
+<div>
+  <form action="/users/profile-edit" method="post" class="snyggForm">
+    <legend>Edit {{user.username}} profile!</legend>
+
+    <div class="form-group mt-4">
+      <label for="user-username">First Name:</label>
+      <input type="text" name="firstName" class="form-control" id="user-firstName" placeholder="Username">
+    </div>
+    <div class="form-group">
+      <label for="user-username">Lastname:</label>
+      <input type="text" name="lastName" class="form-control" id="user-lastName" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <label for="user-username">Location:</label>
+      <input type="text" name="location" class="form-control" id="user-location" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <label for="user-username">Facebook:</label>
+      <input type="text" name="facebook" class="form-control" id="user-facebook" placeholder="Password">
+    </div>
+
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary">Edit</button>
+    </div>
+  </form>
+</div>
