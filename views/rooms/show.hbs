@@ -1,14 +1,15 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-4">
   <h1>{{room.topic}}</h1>
 </div>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-5 makesmaller">
   <div class="col-8">
     {{#each posts as |post|}}
-    <div class="card mb-3">
+    <div class="card mb-3 mt-5">
       <div class="card-body">
         <h3 class="card-title text-center">{{post.subject}}</h3>
         <p class="text-center"><i>Author: {{post.author}}</i></p>
+        <p class="text-center"><i>{{post.createdAt}}</i></p>
         <p>{{post.body}}</p>
         <img src="{{post.img}}" width="200" />
         <hr>
@@ -17,31 +18,34 @@
 
       <div class="card-footer text-muted text-right">
 
-        <div class="btn-group btn-group-sm row footerDiv">
-        <h3 class="points-span">{{post.points}} points </h3>
-          <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form">
+        <div class="btn-group btn-group-sm footerBtns">
+          <h3 class="points-span mr-3">{{post.points}} points </h3>
+          <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
             <input type="hidden" name="points" id="post-points" value="-1">
             <button type="submit" class="downvote-button btn btn-danger">-</button>
           </form>
 
-          <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form">
+          <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
             <input type="hidden" name="points" id="post-points" value="1">
             <button type="submit" class="upvote-button btn btn-success">+</button>
           </form>
         </div>
       </div>
     </div>
-
-
-
-
     
-      {{#each post.comments as |comment|}}
-      <p><b>{{trimString comment.createdAt}} - {{comment.author}}:</b> {{comment.body}}</p>
-      {{/each}}
-      <button class="btn btn-warning"><a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new">New
-          comment</a></button>
+
+
+
+
+
+    {{#each post.comments as |comment|}}
     
+    <p><b>{{comment.author}}:</b> {{comment.body}}</p>
+    <p class="text-muted"><i>{{comment.createdAt}}</i></p>
+    {{/each}}
+    <a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new"><button class="btn btn-warning">New
+        comment</button></a>
+
 
     {{/each}}
 
@@ -49,5 +53,5 @@
 </div>
 
 <div class="row justify-content-center">
-  <button class="btn btn-success"><a href="/rooms/{{room.id}}/posts/new">New Post</a></button>
+  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success">New Post</button></a>
 </div>

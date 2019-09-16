@@ -16,6 +16,9 @@ const PostSchema = new Schema({
     type: Number,
     default: 0
   },
+  createdAt: {
+    type: String
+  },
   comments: [
     {
       type: Schema.Types.ObjectId,

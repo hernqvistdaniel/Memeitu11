@@ -5,6 +5,7 @@ const Room = require("../models/Room");
 const Post = require("../models/Post");
 const User = require("../models/User");
 const commentsRouter = require("./comments");
+const moment = require('moment');
 
 // NEW POST
 router.get("/new", auth.requireLogin, (req, res, next) => {
@@ -29,15 +30,16 @@ router.post("/", auth.requireLogin, (req, res, next) => {
       }
       let post = new Post(req.body);
       post.author = user.username;
-      console.log(post.author);
       post.room = room;
-      console.log(post.room);
-      
+
+      time = moment().format("MMMM Do YYYY, HH:mm:ss a");
+      post.createdAt = time.substr(0, 26);
+
       post.save(function(err, post) {
         if (err) {
           console.error(err);
         }
-        
+
         return res.redirect(`/rooms/${room._id}`);
       });
     });
