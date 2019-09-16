@@ -5,6 +5,13 @@ const CommentSchema = new Schema({
   body: {
     type: String,
     required: true
+  },
+  author: {
+    type: String
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 });
 

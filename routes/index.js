@@ -27,11 +27,11 @@ router.post('/login', (req, res, next) => {
     if (err || !user) {
       const next_error = new Error('Username or Password is incorrect!');
       next_error.status = 401;
-
+      
       return next(next_error);
     } else {
       req.session.userId = user._id;
-
+      
       return res.redirect('/');
     }
   });

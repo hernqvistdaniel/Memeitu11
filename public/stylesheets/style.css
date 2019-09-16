@@ -46,20 +46,16 @@ form {
   color: white;
 }
 
-/* .navbarlogo {
-  width: 70px;
-  height: 70px;
-  border: 1px solid black;
-  display:flex;
-  flex-direction: column;
-  justify-content: START;
-  text-align: right;
-  background-color: orange;
-  border-radius: 10px;
+.points-span {
+  display: flex;
+  align-items: flex-end;
 }
 
-.navbarlogo > h4 {
-  font-size: 16px;
-  margin-top: auto;
-  margin: auto 0 0 0;
+
+/* .card-footer {
+  height: 50px;
+} */
+
+/* .ratingButtons {
+  height: 50px;
 } */

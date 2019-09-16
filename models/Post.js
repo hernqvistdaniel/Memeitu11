@@ -6,8 +6,11 @@ const PostSchema = new Schema({
   body: String,
   img: String,
   link: String,
+  author: {
+    type: String
+  },
   room: {
-    type: Schema.Types.ObjectID, ref: 'Room'
+    type: Schema.Types.ObjectId, ref: 'Room'
   },
   points: {
     type: Number,

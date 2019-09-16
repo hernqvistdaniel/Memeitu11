@@ -8,6 +8,7 @@
     <div class="card mb-3">
       <div class="card-body">
         <h3 class="card-title text-center">{{post.subject}}</h3>
+        <p class="text-center"><i>Author: {{post.author}}</i></p>
         <p>{{post.body}}</p>
         <img src="{{post.img}}" width="200" />
         <hr>
@@ -15,32 +16,32 @@
       </div>
 
       <div class="card-footer text-muted text-right">
-        <span class="points-span">{{post.points}} points </span>
 
-        <div class="btn-group btn-group-sm">
+        <div class="btn-group btn-group-sm row footerDiv">
+        <h3 class="points-span">{{post.points}} points </h3>
           <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form">
             <input type="hidden" name="points" id="post-points" value="-1">
-            <button type="submit" class="downvote-button">-</button>
+            <button type="submit" class="downvote-button btn btn-danger">-</button>
           </form>
 
           <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form">
             <input type="hidden" name="points" id="post-points" value="1">
-            <button type="submit" class="upvote-button">+</button>
+            <button type="submit" class="upvote-button btn btn-success">+</button>
           </form>
         </div>
       </div>
-
-
-
-
     </div>
-    <ul>
+
+
+
+
+    
       {{#each post.comments as |comment|}}
-      <li>{{comment.body}}</li>
+      <p><b>{{trimString comment.createdAt}} - {{comment.author}}:</b> {{comment.body}}</p>
       {{/each}}
       <button class="btn btn-warning"><a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new">New
           comment</a></button>
-    </ul>
+    
 
     {{/each}}
 
