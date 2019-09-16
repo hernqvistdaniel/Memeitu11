@@ -62,7 +62,7 @@ router.post("/", (req, res, next) => {
 
   user.save((err, user) => {
     if (err) console.log(`There was a problem creating a new user: ${err}`);
-    return res.redirect("/login");
+    res.render("users/profile", { user: user});
   });
 });
 
