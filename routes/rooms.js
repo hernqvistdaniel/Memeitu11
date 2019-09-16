@@ -50,7 +50,7 @@ router.post('/:id', auth.requireLogin, (req, res, next) => {
   Room.findByIdAndUpdate(req.params.id, req.body, function(err, room) {
     if(err) { res.render('rooms/noroom') };
 
-    res.redirect('/rooms/' + req.params.id);
+    res.redirect('/rooms/');
   });
 });
 
