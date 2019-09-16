@@ -15,22 +15,27 @@
 
 <body>
   <nav class="navbar navbar-dark bg-dark">
-    <div class="navbarlogo navbar-brand">
+
+    <div class="navbarlogo navbar-brand d-flex flex-end">
       <img class="logo" src="/images/logos/logo.png">
+      <h1 class="navbar-text ml-3 mt-3 center">Meme:it!</h1>
     </div>
-    <div class="navbar-brand">
-      Welcome Home!
-    </div>
-    <div class="navbar-text">
+    
+    <div class="navbar-text d-flex">
+
+      <a class="navbar-brand mr-5" href="/">Home</a>
+      <a class="navbar-brand mr-5" href="/rooms">Rooms</a>
+   
       {{# if currentUserId}}
-        <a class="nav-link" href="/logout">Logout</a>
+      <a class="nav-link" href="/logout">Logout</a>
       {{else}}
-        <a class="nav-link" href="/login">Login</a>
-        <a class="nav-link" href="/users/new">Register</a>
+      <a class="nav-link" href="/login">Login</a>
+      <a class="nav-link" href="/users/new">Register</a>
       {{/if}}
     </div>
+
   </nav>
-    
+
 
   <main>
     {{{body}}}

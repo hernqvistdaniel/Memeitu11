@@ -1,13 +1,12 @@
-<div>
-  Hangouts!
+<div class="mt-5">
+  <h2>Pick a Room!</h2>
 </div>
 
 <div>
-  <ul>
     {{#each rooms as |room|}}
-    <li>
+    <h5 class="mt-4">
       <a href="/rooms/{{room.id}}">{{room.topic}}</a> | <a href="/rooms/{{room.id}}/edit"><img class="cog" src="/images/logos/cog.png"></a>
-    </li>
+    </h5>
     {{/each}}
-  </ul>
 </div>
+    <b><p class="mt-5">Or create a new one <a href="/rooms/new"><u>here!</u></a></p></b>

@@ -51,6 +51,12 @@ form {
   align-items: flex-end;
 }
 
+.news {
+  border: 1px solid black;
+  width: 40%;
+  padding: 2%;
+}
+
 
 /* .card-footer {
   height: 50px;
