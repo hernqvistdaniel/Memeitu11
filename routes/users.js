@@ -4,17 +4,6 @@ const User = require("../models/User");
 const auth = require("./helpers/auth");
 const moment = require("moment");
 
-// // USERS get all
-// router.get("/", auth.requireLogin, (req, res, next) => {
-//   User.find({}, "username", (err, users) => {
-//     if (err) {
-//       console.log(`Couldn't find any users ${err}`);
-//     } else {
-//       res.render("users/index", { users: users });
-//     }
-//   });
-// });
-
 // USERS new
 router.get("/new", (req, res, next) => {
   res.render("users/new");
@@ -80,7 +69,6 @@ router.get('/welcome', (req, res, next) => {
 router.post("/new", async (req, res, next) => {
 
   const isDouble = await User.findOne({ username: req.body.username });
-  console.log(isDouble);
   if (isDouble) {
     res.render('Username already taken');
   }
