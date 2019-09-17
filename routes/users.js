@@ -4,16 +4,16 @@ const User = require("../models/User");
 const auth = require("./helpers/auth");
 const moment = require('moment');
 
-// USERS get all
-router.get("/", auth.requireLogin, (req, res, next) => {
-  User.find({}, "username", (err, users) => {
-    if (err) {
-      console.log(`Couldn't find any users ${err}`);
-    } else {
-      res.render("users/index", { users: users });
-    }
-  });
-});
+// // USERS get all
+// router.get("/", auth.requireLogin, (req, res, next) => {
+//   User.find({}, "username", (err, users) => {
+//     if (err) {
+//       console.log(`Couldn't find any users ${err}`);
+//     } else {
+//       res.render("users/index", { users: users });
+//     }
+//   });
+// });
 
 // USERS new
 router.get("/new", (req, res, next) => {

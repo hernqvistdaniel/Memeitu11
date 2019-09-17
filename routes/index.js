@@ -12,13 +12,12 @@ router.use(function(req, res, next) {
 
 // GET HOMEPAGE
 router.get('/', (req, res, next) => {
-  const currentUserId = req.session.userId;
-  User.findById({ _id: req.session.userId }, function(err, user) {
-    if (err) {
-      console.error(err);
-    }
-  res.render('index', { user: user });
-  });
+    User.findById({ _id: req.session.userId }, function(err, user) {
+      if (err) {
+        console.error(err);
+      }
+      res.render('index', { user: user });
+    }); 
 });
 
 // GET LOGIN SCREEN

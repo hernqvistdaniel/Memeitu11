@@ -25,6 +25,10 @@ const UserSchema = new Schema({
   },
   createdAt: {
     type: String
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
   }
 });
 

@@ -1,0 +1,16 @@
+<div class="mt-5">
+{{# if user.isAdmin}}
+<p>admin</p>
+<div>
+  Users
+</div>
+
+<ul>
+  {{#each users as |user|}}
+  <li>{{user.username}}</li>
+  {{/each}}
+</ul>
+{{else}}
+<p>not admin</p>
+{{/if}}
+</div>
