@@ -1,8 +1,17 @@
 <div class="card-body">
-  <h3 class="card-title mb-4"> {{user.username}}</h3>
+  <h2 class="card-title mb-4"> {{user.username}}</h2>
   <p>Name: {{user.firstName}} {{user.lastName}}</p>
   <p>From: {{user.location}}</p>
   <p>FB: <a href="{{user.facebook}}" target="_blank">Link</a></p>
   <p>Member since: {{user.createdAt}}</p>
-  <a href="/users/profile-edit"><button class="btn btn-primary btn-sm">Edit</button></a>
+  <a class="mb-5" href="/users/profile-edit"><button class="btn btn-primary btn-sm">Edit</button></a>
 </div>
+
+  <hr class="mt-5">
+  <div>
+  <form class="snyggForm text-right" action="/users/profile-delete" method="post">
+  <label for="user-username">Type in your username here if you <b>REALLY</b> want to <b>delete!</b></label>
+    <input type="text" name="userDelete" class="form-control text-right" id="user-delete" placeholder="Are you sure?">
+    <button type="submit" class="btn btn-danger btn-sm">Delete account</button>
+  </form>
+  </div>

@@ -6,7 +6,7 @@
   <ul class="list-group col-md-4">
   {{#each rooms as |room|}}
   <li class="list-group-item d-flex justify-content-between align-items-center">
-    <span><a href="/rooms/{{room.id}}">{{room.topic}}</a></span><span class="badge badge-success badge-pill"><a href="/rooms/{{room.id}}/edit">Edit</a></span>
+    <span><a href="/rooms/{{room.id}}">{{room.topic}}</a></span><a href="/rooms/{{room.id}}/edit"><span class="badge badge-success badge-pill">Edit</span></a>
   </li>
   {{/each}}
   </ul>
@@ -17,11 +17,11 @@
 
 </div>
 <div>
-  <h4 class="mt-5 mb-3">Top comments:</h4>
+  <h4 class="mt-5 mb-3">Top Posts:</h4>
   <ul class="list-group col-md-4">
     {{#each posts as |post|}}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-      {{post.subject}}
+      <p><b>{{post.subject}}</b> <i> by: {{post.author}}</i></p>
       <span class="badge badge-primary badge-pill">{{post.points}}</span>
     </li>
     {{/each}}

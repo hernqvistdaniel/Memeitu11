@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const auth = require("./helpers/auth");
-const moment = require('moment');
+const moment = require("moment");
 
 // // USERS get all
 // router.get("/", auth.requireLogin, (req, res, next) => {
@@ -40,6 +40,23 @@ router.get("/profile-edit", auth.requireLogin, (req, res, next) => {
   });
 });
 
+// DELETE
+router.post("/profile-delete", auth.requireLogin, (req, res, next) => {
+  User.findById({ _id: req.session.userId}, function(err, user) {
+    if (err) { console.error(err) };
+    if (req.body.userDelete === user.username ) {
+      User.findByIdAndDelete({ _id: req.session.userId }, function(err, user) {
+        if (err) {
+          console.error(err);
+        }
+        res.redirect("/logout");
+      });
+    } else {
+      res.redirect("/profile-edit");
+    }
+  });
+});
+
 // PROFILE EDIT SAVE
 router.post("/profile-edit", auth.requireLogin, (req, res, next) => {
   User.findByIdAndUpdate({ _id: req.session.userId }, req.body, function(
@@ -53,8 +70,21 @@ router.post("/profile-edit", auth.requireLogin, (req, res, next) => {
   });
 });
 
+// FIRST TIME WELCOME DISPLAY
+
+router.get('/welcome', (req, res, next) => {
+  res.render('users/welcome');
+});
+
 // USERS create new
-router.post("/", (req, res, next) => {
+router.post("/new", async (req, res, next) => {
+
+  const isDouble = await User.findOne({ username: req.body.username });
+  console.log(isDouble);
+  if (isDouble) {
+    res.render('Username already taken');
+  }
+ 
   const user = new User(req.body);
 
   time = moment().format("MMMM Do YYYY, HH:mm:ss a");
@@ -62,8 +92,8 @@ router.post("/", (req, res, next) => {
 
   user.save((err, user) => {
     if (err) console.log(`There was a problem creating a new user: ${err}`);
-    res.render("users/profile", { user: user});
   });
+  res.redirect("welcome");
 });
 
 module.exports = router;
