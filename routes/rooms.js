@@ -4,6 +4,7 @@ const router = express.Router();
 const auth = require('./helpers/auth');
 const Room = require('../models/Room');
 const Post = require('../models/Post');
+const User = require('../models/User');
 
 // REQUIRE FOR NESTING <--
 const posts = require('./posts');
@@ -12,8 +13,9 @@ const posts = require('./posts');
 router.get('/', auth.requireLogin, (req, res, next) => {
   Room.find({}, 'topic', function(err, rooms) {
     Post.find({ room: rooms }).populate('posts').sort({ points: -1 }).exec(function(err, posts) {
-
-      res.render('rooms/index', { rooms: rooms, posts: posts });
+      if (posts.length = 3) {
+        res.render('rooms/index', { rooms: rooms, posts: posts });
+      }
   });
   });
 });
@@ -31,7 +33,12 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
     Post.find({ room: room }).sort({ points: -1 }).populate('comments').exec(function(err, posts) {
       if(err) { console.error(err) };
 
-      res.render('rooms/show', { room: room, posts: posts, roomId: req.params.id });
+      User.find({ username: posts.author }, function(err, user) {
+        if(err) { console.error(err) };
+        console.log(posts.author);
+        res.render('rooms/show', { room: room, posts: posts, roomId: req.params.id, user: user });
+      });
+
     });
   });
 });

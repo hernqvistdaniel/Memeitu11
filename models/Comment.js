@@ -9,6 +9,9 @@ const CommentSchema = new Schema({
   author: {
     type: String
   },
+  authorPic: {
+    type: String
+  },
   createdAt: {
     type: String,
   }

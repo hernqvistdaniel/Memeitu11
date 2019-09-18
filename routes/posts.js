@@ -30,6 +30,7 @@ router.post("/", auth.requireLogin, (req, res, next) => {
       }
       let post = new Post(req.body);
       post.author = user.username;
+      post.authorPic = user.picLink;
       post.room = room;
 
       time = moment().format("MMMM Do YYYY, HH:mm:ss a");

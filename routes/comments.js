@@ -43,6 +43,7 @@ router.post("/", auth.requireLogin, (req, res, next) => {
         let comment = new Comment(req.body);
         post.comments.unshift(comment);
         comment.author = user.username;
+        comment.authorPic = user.picLink;
 
         post.save(function(err, post) {
           if (err) {

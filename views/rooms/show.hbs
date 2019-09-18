@@ -5,14 +5,17 @@
   <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success">New Post</button></a>
 </div>
 
-<div class="row justify-content-center mt-5 makesmaller">
+<div class="row justify-content-center mt-5">
   <div class="col-8">
     {{#each posts as |post|}}
     <div class="card mb-3 mt-5">
       <div class="card-header">
-        <h3 class="card-title text-center">{{post.subject}}</h3>
-        <p class="text-center"><i>Author: {{post.author}}</i></p>
-        <p class="text-center"><i>{{post.createdAt}}</i></p>
+        <h3 class="text-center">{{post.subject}}</h3>
+        <div class="row mr-4 ml-4">
+        <p class="text-right mr-4"><i>Author: {{post.author}}</i></p>
+        <img class="text-right mr-4" src="{{post.authorPic}}" height="20px" alt="profile picture" />
+        <p class="text-right mr-4"><i>{{post.createdAt}}</i></p>
+        </div>
       </div>
       <div class="card-body">
         <p>{{post.body}}</p>
@@ -46,6 +49,7 @@
     {{#each post.comments as |comment|}}
 
     <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
+    <img src="{{comment.authorPic}}" width="20px" alt="profile picture" />
     <p class="text-muted"><i>{{comment.createdAt}}</i></p>
     {{/each}}
     <a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new"><button class="btn btn-primary btn-sm mb-5">New
