@@ -22,9 +22,12 @@ router.get("/new", auth.requireLogin, (req, res, next) => {
 
 // GET SPECIFIC POSTS?
 router.get('/show/:id', auth.requireLogin, (req, res, next) => {
-  Post.findById({ _id: req.params.id }).populate('comments').exec(function(err, post) {
+  User.findById({ _id: req.session.userId }, function(err, user) {
     if (err) { console.error(err) };
-    res.render('posts/show', { post: post})
+    Post.findById({ _id: req.params.id }).populate('comments').exec(function(err, post) {
+      if (err) { console.error(err) };
+      res.render('posts/show', { post: post, user: user })
+    });
   });
 });
 
