@@ -25,6 +25,7 @@ router.get('/show/:id', auth.requireLogin, (req, res, next) => {
   User.findById({ _id: req.session.userId }, function(err, user) {
     if (err) { console.error(err) };
     Post.findById({ _id: req.params.id }).populate('comments').exec(function(err, post) {
+
       if (err) { console.error(err) };
       res.render('posts/show', { post: post, user: user })
     });
