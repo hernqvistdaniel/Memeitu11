@@ -57,7 +57,7 @@ router.post("/", auth.requireLogin, (req, res, next) => {
               console.error(err);
             }
 
-            return res.redirect(`/rooms/${room.id}`);
+            return res.redirect(`/rooms/${req.params.roomId}/posts/show/${req.params.postId}`);
           });
         });
       });

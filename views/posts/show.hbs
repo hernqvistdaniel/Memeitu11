@@ -1,13 +1,12 @@
 <div class="row justify-content-center mt-5">
-  <div class="col-8">
+  <div class="col-10">
     <div class="card mb-3 mt-5">
       <div class="card-header">
-        <a href="{{room._id}}/posts/show/{{post.id}}"><p>{{post._id}}</p></a>
         <h3 class="text-center">{{post.subject}}</h3>
         <div class="row mr-4 ml-4 justify-content-center">
-        <p class="text-right mr-4"><i>Author: {{post.author}}</i></p>
-        <img class="text-right mr-4" src="{{post.authorPic}}" height="20px" alt="profile picture" />
-        <p class="text-right mr-4"><i>{{post.createdAt}}</i></p>
+          <p class="text-right mr-4"><i>Author: {{post.author}}</i></p>
+          <img class="text-right mr-4" src="{{post.authorPic}}" height="20px" alt="profile picture" />
+          <p class="text-right mr-4"><i>{{post.createdAt}}</i></p>
         </div>
       </div>
       <div class="card-body">
@@ -34,17 +33,17 @@
       </div>
     </div>
 
-        {{#each post.comments as |comment|}}
-    <div class="row">
-    <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
-    <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
+    {{#each post.comments as |comment|}}
+    <div class="row col-10">
+      <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
+      <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
     </div>
     <p class="text-muted"><i>{{comment.createdAt}}</i></p>
 
     {{/each}}
 
-        <a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new"><button class="btn btn-primary btn-sm mb-5">New
+    <a href="/posts/{{post.id}}/comments/new"><button class="btn btn-primary btn-sm mb-5">New
         comment</button></a>
 
-    </div>
-    </div>
+  </div>
+</div>

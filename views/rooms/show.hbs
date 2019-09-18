@@ -1,68 +1,24 @@
-<div class="row justify-content-center mt-4"></div>
+<div class="row justify-content-center mt-4">
   <h1>{{room.topic}}</h1>
 </div>
-<div class="row justify-content-center mt-2">
+<div class="row justify-content-center mt-2 mb-4">
   <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success">New Post</button></a>
 </div>
 
-<div class="row justify-content-center mt-5">
-  <div class="col-8">
+<div class="row justify-content-center mt-2">
+  <ul class="list-group col-md-8">
     {{#each posts as |post|}}
-    <div class="card mb-3 mt-5">
-      <div class="card-header">
-        
-        <a href="{{room._id}}/posts/show/{{post.id}}"><h3 class="text-center">{{post.subject}}</h3></a>
-        <div class="row mr-4 ml-4 justify-content-center">
-        <p class="text-right mr-4"><i>Author: {{post.author}}</i></p>
-        <img class="text-right mr-4" src="{{post.authorPic}}" height="20px" alt="profile picture" />
-        <p class="text-right mr-4"><i>{{post.createdAt}}</i></p>
-        </div>
+    <a href="{{room._id}}/posts/show/{{post.id}}">
+    <li class="list-group-item d-flex justify-content-between">
+      <div>
+      <p class="text-left"><b>{{post.subject}}</b> <i> by: {{post.author}}</i></p>
       </div>
-      <div class="card-body">
-        <p>{{post.body}}</p>
-        <img src="{{post.img}}" width="200" />
-        <hr>
-        <p><a href="{{post.link}}" target="_blank">{{post.link}}</a></p>
+      <div class="row">
+      <span class="text-left mr-4">{{post.createdAt}}</span>
+      <h4 class="text-right"><span class="badge badge-primary badge-primary">{{post.points}}</span></h4>
       </div>
-
-      <div class="card-footer text-muted text-right">
-
-        <div class="btn-group btn-group-sm footerBtns">
-          <h4 class="points-span mr-3">{{post.points}} points </h4>
-          <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
-            <input type="hidden" name="points" id="post-points" value="-1">
-            <button type="submit" class="downvote-button btn btn-sm btn-danger">-</button>
-          </form>
-
-          <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
-            <input type="hidden" name="points" id="post-points" value="1">
-            <button type="submit" class="upvote-button btn btn-sm btn-success">+</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
-
-
-
-
-    {{#each post.comments as |comment|}}
-    <div class="row">
-    <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
-    <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
-    </div>
-    <p class="text-muted"><i>{{comment.createdAt}}</i></p>
+    </li>
+    </a>
     {{/each}}
-    <a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new"><button class="btn btn-primary btn-sm mb-5">New
-        comment</button></a>
-
-
-    {{/each}}
-
-  </div>
-</div>
-
-<div class="row justify-content-center">
-  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success btn-block">New Post</button></a>
+  </ul>
 </div>
