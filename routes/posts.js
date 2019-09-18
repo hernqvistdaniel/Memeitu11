@@ -4,8 +4,10 @@ const auth = require("./helpers/auth");
 const Room = require("../models/Room");
 const Post = require("../models/Post");
 const User = require("../models/User");
-const commentsRouter = require("./comments");
 const moment = require('moment');
+
+const commentsRouter = require("./comments");
+
 
 // NEW POST
 router.get("/new", auth.requireLogin, (req, res, next) => {
@@ -15,6 +17,14 @@ router.get("/new", auth.requireLogin, (req, res, next) => {
     }
 
     res.render("posts/new", { room: room });
+  });
+});
+
+// GET SPECIFIC POSTS?
+router.get('/show/:id', auth.requireLogin, (req, res, next) => {
+  Post.findById({ _id: req.params.id }).populate('comments').exec(function(err, post) {
+    if (err) { console.error(err) };
+    res.render('posts/show', { post: post})
   });
 });
 

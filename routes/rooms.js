@@ -12,11 +12,14 @@ const posts = require('./posts');
 // INDEX ROOMS
 router.get('/', auth.requireLogin, (req, res, next) => {
   Room.find({}, 'topic', function(err, rooms) {
-    Post.find({ room: rooms }).populate('posts').sort({ points: -1 }).exec(function(err, posts) {
-      if (posts.length = 3) {
-        res.render('rooms/index', { rooms: rooms, posts: posts });
-      }
-  });
+    User.findById({ _id: req.session.userId }, function(err, user) {
+      if (err) { console.error(err) };
+      Post.find({ room: rooms }).populate('posts').sort({ points: -1 }).exec(function(err, posts) {
+        if (posts.length = 3) {
+          res.render('rooms/index', { rooms: rooms, posts: posts, user: user });
+        }
+      });
+    });
   });
 });
 
@@ -29,17 +32,13 @@ router.get('/new', auth.requireLogin, (req, res, next) => {
 router.get('/:id', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.id, function(err, room) {
     if(err) { res.render('rooms/noroom') };
-
+    User.findById({ _id: req.session.userId }, function(err, user) {
     Post.find({ room: room }).sort({ points: -1 }).populate('comments').exec(function(err, posts) {
       if(err) { console.error(err) };
 
-      User.find({ username: posts.author }, function(err, user) {
-        if(err) { console.error(err) };
-        console.log(posts.author);
-        res.render('rooms/show', { room: room, posts: posts, roomId: req.params.id, user: user });
-      });
-
+        res.render('rooms/show', { room: room, posts: posts, roomId: req.params.id, user: user});
     });
+  });
   });
 });
 

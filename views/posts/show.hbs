@@ -1,17 +1,9 @@
-<div class="row justify-content-center mt-4"></div>
-  <h1>{{room.topic}}</h1>
-</div>
-<div class="row justify-content-center mt-2">
-  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success">New Post</button></a>
-</div>
-
 <div class="row justify-content-center mt-5">
   <div class="col-8">
-    {{#each posts as |post|}}
     <div class="card mb-3 mt-5">
       <div class="card-header">
-        
-        <a href="{{room._id}}/posts/show/{{post.id}}"><h3 class="text-center">{{post.subject}}</h3></a>
+        <a href="{{room._id}}/posts/show/{{post.id}}"><p>{{post._id}}</p></a>
+        <h3 class="text-center">{{post.subject}}</h3>
         <div class="row mr-4 ml-4 justify-content-center">
         <p class="text-right mr-4"><i>Author: {{post.author}}</i></p>
         <img class="text-right mr-4" src="{{post.authorPic}}" height="20px" alt="profile picture" />
@@ -42,27 +34,17 @@
       </div>
     </div>
 
-
-
-
-
-
-    {{#each post.comments as |comment|}}
+        {{#each post.comments as |comment|}}
     <div class="row">
     <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
     <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
     </div>
     <p class="text-muted"><i>{{comment.createdAt}}</i></p>
+
     {{/each}}
-    <a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new"><button class="btn btn-primary btn-sm mb-5">New
+
+        <a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new"><button class="btn btn-primary btn-sm mb-5">New
         comment</button></a>
 
-
-    {{/each}}
-
-  </div>
-</div>
-
-<div class="row justify-content-center">
-  <a href="/rooms/{{room.id}}/posts/new"><button class="btn btn-success btn-block">New Post</button></a>
-</div>
+    </div>
+    </div>

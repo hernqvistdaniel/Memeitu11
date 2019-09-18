@@ -1,5 +1,9 @@
+html {
+  overflow-y: scroll;
+}
+
 body {
-  padding: 20px;
+  padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: black;
 }
@@ -56,18 +60,6 @@ main {
   width: 40%;
   padding: 2%;
 }
-
-/* .smallgrp {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-}
-
-.btngrp {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-} */
 
 .comment {
   font-size: 1.2em;
