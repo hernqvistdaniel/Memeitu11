@@ -71,7 +71,7 @@ router.post("/:id", auth.requireLogin, (req, res, next) => {
         console.error(err);
       }
 
-      return res.redirect(`/rooms/${post.room}`);
+      return res.redirect(`/rooms/${post.room}/posts/show/${req.params.id}`);
     });
   });
 });
