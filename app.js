@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const Handlebars = require('hbs');
 require('dotenv').config();
 
-
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const rooms = require('./routes/rooms');

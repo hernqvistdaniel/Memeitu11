@@ -30,12 +30,10 @@ router.post("/", auth.requireLogin, (req, res, next) => {
     if (err) {
       console.error(err);
     }
-
     Post.findById(req.params.postId, function(err, post) {
       if (err) {
         console.error(err);
       }
-
       User.findById({ _id: req.session.userId }, function(err, user) {
         if (err) {
           console.error(err);

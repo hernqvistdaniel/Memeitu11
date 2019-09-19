@@ -10,18 +10,31 @@
         </div>
 
         {{#ifCond user.username post.author}}
-        {{v1}}
+  
         <div class="justify-content-end row">
           <a href="/rooms/{{post.room}}/posts/{{post.id}}/edit">
             <button class="mr-3 btn btn-sm btn-success">Edit</button>
           </a>
           <a href="">
             <form action="/rooms/{{post.room}}/posts/show/{{post.id}}/delete" method="post">
-            <button class="btn btn-sm btn-danger">Delete</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
             </form>
           </a>
         </div>
-        {{v2}}
+
+        {{else}}
+        {{#ifCond user.isAdmin true}}
+        <div class="justify-content-end row">
+          <a href="/rooms/{{post.room}}/posts/{{post.id}}/edit">
+            <button class="mr-3 btn btn-sm btn-success">Edit</button>
+          </a>
+          <a href="">
+            <form action="/rooms/{{post.room}}/posts/show/{{post.id}}/delete" method="post">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </a>
+        </div>
+        {{/ifCond}}
         {{/ifCond}}
       </div>
       <div class="card-body">

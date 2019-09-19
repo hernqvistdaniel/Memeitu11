@@ -1,5 +1,7 @@
-<div class="col-md-8">
-  <div>
+<div class="text-center justify-content-center container">
+
+
+  <div class="mb-5">
     <h2 class="card-title mb-3"> {{user.username}}</h2>
     <img class="mb-3" src="{{user.picLink}}" width="100" />
     <p><b>Name:</b> {{user.firstName}} {{user.lastName}}</p>
@@ -9,12 +11,18 @@
     <a class="mb-2" href="/users/profile-edit"><button class="btn btn-primary btn-sm">Edit</button></a>
   </div>
 
-  <hr>
-  <div>
-    <form class="snyggForm text-right" action="/users/profile-delete" method="post">
-      <label for="user-username">Type in your username here if you <b>REALLY</b> want to <b>delete</b> your account!</label>
-      <input type="text" name="userDelete" class="form-control text-right" id="user-delete" placeholder="Are you sure?">
+  <hr class="mb-5">
+
+
+  <form class="row justify-content-md-center mt-5" action="/users/profile-delete" method="post">
+    <div class="col-md-4 mt-5">
+      <label for="user-username">Type in your username here if you <b>REALLY</b> want to <b>delete</b> your
+        account!</label>
+      <input type="text" name="userDelete" class="form-control" id="user-delete" placeholder="Are you sure?">
       <button type="submit" class="btn btn-danger btn-sm">Delete account</button>
-    </form>
-  </div>
+    </div>
+  </form>
+
+
+
 </div>
