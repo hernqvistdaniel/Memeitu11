@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const Handlebars = require('hbs');
 
 
 const indexRouter = require('./routes/index');
@@ -32,6 +33,14 @@ app.use('/users', usersRouter);
 app.use('/rooms', rooms);
 app.use('/admin', admin);
 app.use('/posts', posts);
+
+// HANDLEBARS HELPERS
+Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+  if(v1 === v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

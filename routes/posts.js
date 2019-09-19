@@ -24,7 +24,7 @@ router.get("/new", auth.requireLogin, (req, res, next) => {
 router.get('/show/:id', auth.requireLogin, (req, res, next) => {
   User.findById({ _id: req.session.userId }, function(err, user) {
     if (err) { console.error(err) };
-    Post.findById({ _id: req.params.id }).populate('comments').exec(function(err, post) {
+    Post.findById(req.params.id).populate('comments').exec(function(err, post) {
 
       if (err) { console.error(err) };
       res.render('posts/show', { post: post, user: user })
@@ -61,7 +61,31 @@ router.post("/", auth.requireLogin, (req, res, next) => {
   });
 });
 
-// UPDATE POST
+// UPDATE POST FORM
+router.get('/:id/edit', auth.requireLogin, (req, res, next) => {
+  Post.findById(req.params.id, function(err, post) {
+    res.render('posts/edit', { post: post });
+  });
+});
+
+// UPDATE POST BODY
+router.post("/:id/edit", auth.requireLogin, (req, res, next) => {
+  Post.findByIdAndUpdate({_id: req.params.id}, req.body, function(err, post) {
+   
+      return res.redirect(`/rooms/${post.roomId}/posts/show/${req.params.id}`);
+  });
+
+});
+
+// DELETE POST
+router.post("/show/:id/delete", auth.requireLogin, (req, res, next) => {
+  Post.findByIdAndDelete(req.params.id, function(err, post) {
+    if (err) { console.error(err) };
+    return res.redirect(`/rooms/${req.params.roomId}`);
+  });
+});
+
+// UPDATE POST POINTS
 router.post("/:id", auth.requireLogin, (req, res, next) => {
   Post.findById(req.params.id, function(err, post) {
     post.points += parseInt(req.body.points);

@@ -8,12 +8,27 @@
           <img class="text-right mr-4" src="{{post.authorPic}}" height="20px" alt="profile picture" />
           <p class="text-right mr-4"><i>{{post.createdAt}}</i></p>
         </div>
+
+        {{#ifCond user.username post.author}}
+        {{v1}}
+        <div class="justify-content-end row">
+          <a href="/rooms/{{post.room}}/posts/{{post.id}}/edit">
+            <button class="mr-3 btn btn-sm btn-success">Edit</button>
+          </a>
+          <a href="">
+            <form action="/rooms/{{post.room}}/posts/show/{{post.id}}/delete" method="post">
+            <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </a>
+        </div>
+        {{v2}}
+        {{/ifCond}}
       </div>
       <div class="card-body">
         <p>{{post.body}}</p>
         <a href="{{post.img}}"><img src="{{post.img}}" width="200" />
-        <hr>
-        <p><a href="{{post.link}}" target="_blank">{{post.link}}</a></p>
+          <hr>
+          <p><a href="{{post.link}}" target="_blank">{{post.link}}</a></p>
       </div>
 
       <div class="card-footer text-muted text-right">
