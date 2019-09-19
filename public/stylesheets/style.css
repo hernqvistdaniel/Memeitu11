@@ -18,6 +18,10 @@ a {
   margin-top: 15px;
 }
 
+label {
+  font-weight: bold;
+}
+
 main {
   padding: 1em 2em;
 }
@@ -42,21 +46,21 @@ li:hover {
 }
 
 .navItems {
-  transition: color .25 ease-in-out;
+  transition: color .35 ease-in-out;
+}
+
+.navItems:hover {
+  color: lightgrey!important;
+  transform: scale(1.1);
 }
 
 .navTitle {
   transition: 1 ease-in-out;
 }
 
-.navItems:hover {
-  color: lightgrey!important;
-  transform: scale(1.05);
-}
-
 .navTitle:hover {
   color: white!important;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .logo {

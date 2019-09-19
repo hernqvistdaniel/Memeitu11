@@ -3,20 +3,24 @@
     <legend>Edit {{user.username}} profile!</legend>
 
     <div class="form-group mt-4">
-      <label for="user-username">First Name:</label>
+      <label for="user-firstname">First Name:</label>
       <input type="text" name="firstName" class="form-control" id="user-firstName" value="{{user.firstName}}">
     </div>
     <div class="form-group">
-      <label for="user-username">Lastname:</label>
+      <label for="user-lastname">Lastname:</label>
       <input type="text" name="lastName" class="form-control" id="user-lastName" value="{{user.lastName}}">
     </div>
     <div class="form-group">
-      <label for="user-username">Location:</label>
+      <label for="user-location">Location:</label>
       <input type="text" name="location" class="form-control" id="user-location" value="{{user.location}}">
     </div>
     <div class="form-group">
-      <label for="user-username">Facebook:</label>
+      <label for="user-facebook">Facebook:</label>
       <input type="text" name="facebook" class="form-control" id="user-facebook" value="{{user.facebook}}">
+    </div>
+    <div class="form-group">
+      <label for="user-picture">Picture:</label>
+      <input type="text" name="picLink" class="form-control" id="user-picLink" value="{{user.picLink}}">
     </div>
 
     <div class="text-right">
