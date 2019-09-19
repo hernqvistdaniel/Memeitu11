@@ -18,22 +18,22 @@
 
     <div class="navbarlogo navbar-brand d-flex flex-end">
       <img class="logo" src="/images/logos/logo.png">
-      <h1 class="navbar-text ml-3 mt-4 center">Meme:it!</h1>
+      <a href="/"><h1 class="navbar-text ml-3 mt-2 center navTitle">Meme:it!</h1></a>
     </div>
     
     <div class="navbar-text d-flex">
       {{# if user.isAdmin}}
-      <a class="navbar-brand mr-5" href="/admin">Admin</a>
+      <a class="navbar-brand mr-5 navItems" href="/admin">Admin</a>
       {{/if}}
-      <a class="navbar-brand mr-5" href="/">Home</a>
-      <a class="navbar-brand mr-5" href="/users/profile">Profile</a>
-      <a class="navbar-brand mr-5" href="/rooms">Rooms</a>
+      <a class="navbar-brand mr-5 navItems" href="/">Home</a>
+      <a class="navbar-brand mr-5 navItems" href="/users/profile">Profile</a>
+      <a class="navbar-brand mr-5 navItems" href="/rooms">Rooms</a>
    
       {{# if currentUserId}}
-      <a class="nav-link" href="/logout">Logout</a>
+      <a class="nav-link navItems" href="/logout">Logout</a>
       {{else}}
-      <a class="nav-link" href="/login">Login</a>
-      <a class="nav-link" href="/users/new">Register</a>
+      <a class="nav-link navItems" href="/login">Login</a>
+      <a class="nav-link navItems" href="/users/new">Register</a>
       {{/if}}
     </div>
 

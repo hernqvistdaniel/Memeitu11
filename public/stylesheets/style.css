@@ -2,7 +2,12 @@ html {
   overflow-y: scroll;
 }
 
+*, a:link, a:visited {
+  text-decoration: none;
+}
+
 body {
+  text-decoration: none;
   padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: black;
@@ -11,7 +16,6 @@ body {
 a {
   color: black;
   margin-top: 15px;
-  text-decoration: none;
 }
 
 main {
@@ -19,12 +23,11 @@ main {
 }
 
 li {
-  text-decoration: none;
-  transition: background-color 1s ease-in-out
+  transition: background-color .25s ease-in-out;
 }
 
 li:hover {
-  background-color: lightgrey;
+  background-color: #DCDCDC;
 }
 
 .snyggForm {
@@ -36,6 +39,24 @@ li:hover {
 .navbarlogo {
   height: 10%;
   width: 10%;
+}
+
+.navItems {
+  transition: color .25 ease-in-out;
+}
+
+.navTitle {
+  transition: 1 ease-in-out;
+}
+
+.navItems:hover {
+  color: lightgrey!important;
+  transform: scale(1.05);
+}
+
+.navTitle:hover {
+  color: white!important;
+  transform: scale(1.05);
 }
 
 .logo {
