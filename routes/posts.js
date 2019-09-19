@@ -8,7 +8,6 @@ const moment = require('moment');
 
 const commentsRouter = require("./comments");
 
-
 // NEW POST
 router.get("/new", auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.roomId, function(err, room) {
