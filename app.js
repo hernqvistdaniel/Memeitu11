@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const Handlebars = require('hbs');
+require('dotenv').config();
 
 
 const indexRouter = require('./routes/index');
@@ -58,9 +59,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const mongoURI = 'mongodb+srv://dhernqvist:Lorien1986@memeit-lkmkp.mongodb.net/test?retryWrites=true&w=majority'
-
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+mongoose.connect(process.env.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   console.log('Connected to mongoDB!');
 });
 mongoose.Promise = global.Promise;
