@@ -1,18 +1,20 @@
-<div>
-  <h2 class="card-title mb-3"> {{user.username}}</h2>
-  <img class="mb-3" src="{{user.picLink}}" width="100" />
-  <p><b>Name:</b> {{user.firstName}} {{user.lastName}}</p>
-  <p><b>From:</b> {{user.location}}</p>
-  <p><b>FB:</b> <a href="{{user.facebook}}" target="_blank">Link</a></p>
-  <p><b>Member since:</b> {{user.createdAt}}</p>
-  <a class="mb-2" href="/users/profile-edit"><button class="btn btn-primary btn-sm">Edit</button></a>
-</div>
+<div class="col-md-8">
+  <div>
+    <h2 class="card-title mb-3"> {{user.username}}</h2>
+    <img class="mb-3" src="{{user.picLink}}" width="100" />
+    <p><b>Name:</b> {{user.firstName}} {{user.lastName}}</p>
+    <p><b>From:</b> {{user.location}}</p>
+    <p><b>FB:</b> <a href="{{user.facebook}}" target="_blank">Link</a></p>
+    <p><b>Member since:</b> {{user.createdAt}}</p>
+    <a class="mb-2" href="/users/profile-edit"><button class="btn btn-primary btn-sm">Edit</button></a>
+  </div>
 
   <hr>
   <div>
-  <form class="snyggForm text-right" action="/users/profile-delete" method="post">
-  <label for="user-username">Type in your username here if you <b>REALLY</b> want to <b>delete!</b></label>
-    <input type="text" name="userDelete" class="form-control text-right" id="user-delete" placeholder="Are you sure?">
-    <button type="submit" class="btn btn-danger btn-sm">Delete account</button>
-  </form>
+    <form class="snyggForm text-right" action="/users/profile-delete" method="post">
+      <label for="user-username">Type in your username here if you <b>REALLY</b> want to <b>delete</b> your account!</label>
+      <input type="text" name="userDelete" class="form-control text-right" id="user-delete" placeholder="Are you sure?">
+      <button type="submit" class="btn btn-danger btn-sm">Delete account</button>
+    </form>
   </div>
+</div>

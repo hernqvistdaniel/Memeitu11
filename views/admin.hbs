@@ -1,23 +1,26 @@
 <div class="mt-5">
-{{# if user.isAdmin}}
-<h1>Admin</h1>
-<div class="mt-3 mb-4">
-  <h2>Users</h2>
-</div>
-
-<div class="col-md-5">
-  {{#each users as |user|}}
-  <div class="mb-3 row justify-content-between">
-  <h3>{{user.username}}</h3>
-  <form>
-  <button class="btn btn-sm btn-primary">Mod</button>
-  <button class="btn btn-sm btn-danger">Del</button>
-  <button class="btn btn-sm btn-success">Edit</button>
-  </form>
+  {{# if user.isAdmin}}
+  <h1>Admin</h1>
+  <div class="mt-3 mb-4">
+    <h2>Users</h2>
   </div>
-  {{/each}}
-</div>
-{{else}}
-<p>not admin</p>
-{{/if}}
+
+  <div class="col-md-5">
+    {{#each users as |user|}}
+    <li class="mb-3 row justify-content-between">
+      <h3>{{user.username}}</h3>
+      <div class="row">
+        <form action="" method="post">
+          <button class="mr-2 btn btn-sm btn-primary">Mod</button>
+        </form>
+        <form action="" method="post">
+          <button class="btn btn-sm btn-danger">Del</button>
+        </form>
+      </div>
+    </li>
+    {{/each}}
+  </div>
+  {{else}}
+  <h1>You are not <b>authorized</b> to see the content of this page!</h1>
+  {{/if}}
 </div>
