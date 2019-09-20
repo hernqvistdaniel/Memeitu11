@@ -2,8 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-  subject: String,
-  body: String,
+  subject: {
+    type: String,
+    maxlength: 25
+  },
+  body: {
+    type: String,
+    maxlength: 800
+  },
   img: String,
   link: String,
   author: {

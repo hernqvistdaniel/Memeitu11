@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const RoomSchema = new Schema({
   topic: {
     type: String,
-    required: true
+    required: true,
+    maxlength: 20
   }
 });
 
