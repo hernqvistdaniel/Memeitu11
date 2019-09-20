@@ -4,7 +4,7 @@ const auth = require("./helpers/auth");
 const Room = require("../models/Room");
 const Post = require("../models/Post");
 const User = require("../models/User");
-const moment = require('moment');
+const moment = require("moment");
 
 const commentsRouter = require("./comments");
 
@@ -19,15 +19,24 @@ router.get("/new", auth.requireLogin, (req, res, next) => {
   });
 });
 
-// GET SPECIFIC POSTS?
-router.get('/show/:id', auth.requireLogin, (req, res, next) => {
+// GET SPECIFIC POSTS
+router.get("/show/:id", auth.requireLogin, (req, res, next) => {
   User.findById({ _id: req.session.userId }, function(err, user) {
-    if (err) { console.error(err) };
-    Post.findById(req.params.id).populate('comments').exec(function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+    Post.findById(req.params.id)
+      .populate("comments")
+      .exec(function(err, post) {
+        if (err) {
+          console.error(err);
+        }
 
-      if (err) { console.error(err) };
-      res.render('posts/show', { post: post, user: user })
-    });
+        res.render("posts/show", {
+          post: post,
+          user: user
+        });
+      });
   });
 });
 
@@ -61,25 +70,25 @@ router.post("/", auth.requireLogin, (req, res, next) => {
 });
 
 // UPDATE POST FORM
-router.get('/:id/edit', auth.requireLogin, (req, res, next) => {
+router.get("/:id/edit", auth.requireLogin, (req, res, next) => {
   Post.findById(req.params.id, function(err, post) {
-    res.render('posts/edit', { post: post });
+    res.render("posts/edit", { post: post });
   });
 });
 
 // UPDATE POST BODY
 router.post("/:id/edit", auth.requireLogin, (req, res, next) => {
-  Post.findByIdAndUpdate({_id: req.params.id}, req.body, function(err, post) {
-   
-      return res.redirect(`/rooms/${post.roomId}/posts/show/${req.params.id}`);
+  Post.findByIdAndUpdate({ _id: req.params.id }, req.body, function(err, post) {
+    return res.redirect(`/rooms/${post.roomId}/posts/show/${req.params.id}`);
   });
-
 });
 
 // DELETE POST
 router.post("/show/:id/delete", auth.requireLogin, (req, res, next) => {
   Post.findByIdAndDelete(req.params.id, function(err, post) {
-    if (err) { console.error(err) };
+    if (err) {
+      console.error(err);
+    }
     return res.redirect(`/rooms/${req.params.roomId}`);
   });
 });

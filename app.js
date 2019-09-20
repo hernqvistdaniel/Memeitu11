@@ -13,6 +13,9 @@ const rooms = require('./routes/rooms');
 const admin = require('./routes/admin');
 const posts = require('./routes/posts');
 
+const paginate = require('handlebars-paginate');
+
+
 const app = express();
 
 const session = require('express-session');
@@ -41,6 +44,9 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
   }
   return options.inverse(this);
 });
+
+Handlebars.registerHelper('paginate', paginate);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -10,7 +10,7 @@
         </div>
 
         {{#ifCond user.username post.author}}
-  
+
         <div class="justify-content-end row">
           <a href="/rooms/{{post.room}}/posts/{{post.id}}/edit">
             <button class="mr-3 btn btn-sm btn-success">Edit</button>
@@ -60,18 +60,29 @@
         </div>
       </div>
     </div>
-
     {{#each post.comments as |comment|}}
     <div class="row col-10">
       <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
       <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
     </div>
-    <p class="text-muted"><i>{{comment.createdAt}}</i></p>
-
+    <div class="row col-10">
+      <p class="text-muted"><i>{{comment.createdAt}}</i></p>
+      {{!-- {{#ifCond user.username comment.author}}
+      <p class="ml-3 badge badge-success badge-pill">edit</p>
+      <p class="ml-1 badge badge-danger badge-pill">delete</p>
+    {{/ifCond}} --}}
+    </div>
     {{/each}}
 
-    <a href="/posts/{{post.id}}/comments/new"><button class="btn btn-primary btn-sm mb-5">New
-        comment</button></a>
-
+    <div class="row justify-content-md-center">
+      <div class="col-12">
+        <form action="/posts/{{post.id}}/comments" method="post" id="new-comment-form">   
+          <label for="comment">New Comment</label>
+            <textarea type="text" autofocus="autofocus" name="body" class="form-control" rows="1" id="comment-body"
+              placeholder="Comment here" form="new-comment-form"></textarea>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+    </div>
   </div>
 </div>
