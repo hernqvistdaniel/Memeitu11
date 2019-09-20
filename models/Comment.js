@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const CommentSchema = new Schema({
   body: {
     type: String,
-    required: true
+    required: true,
+    maxlength: 200
   },
   author: {
     type: String

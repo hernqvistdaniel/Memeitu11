@@ -61,24 +61,29 @@
       </div>
     </div>
     {{#each post.comments as |comment|}}
-    <div class="row col-10">
+   
+      <div class="row col-10">
       <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
-      <p class="comment"><b>{{comment.author}}:</b> {{comment.body}}</p>
+      <b class="mr-2">{{comment.author}}</b>
+      <p class="text-muted"><i>{{comment.createdAt}}</i></p>
+    </div>
+    <div class="row col-10 ml-3">
+      <p class="comment"> {{comment.body}}</p>
     </div>
     <div class="row col-10">
-      <p class="text-muted"><i>{{comment.createdAt}}</i></p>
       {{!-- {{#ifCond user.username comment.author}}
       <p class="ml-3 badge badge-success badge-pill">edit</p>
       <p class="ml-1 badge badge-danger badge-pill">delete</p>
     {{/ifCond}} --}}
     </div>
+
     {{/each}}
 
     <div class="row justify-content-md-center">
       <div class="col-12">
         <form action="/posts/{{post.id}}/comments" method="post" id="new-comment-form">   
           <label for="comment">New Comment</label>
-            <textarea type="text" autofocus="autofocus" name="body" class="form-control" rows="1" id="comment-body"
+            <textarea type="text" maxlength="200" autofocus="autofocus" name="body" class="form-control" rows="1" id="comment-body"
               placeholder="Comment here" form="new-comment-form"></textarea>
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
