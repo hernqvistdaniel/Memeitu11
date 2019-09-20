@@ -31,9 +31,11 @@ router.get("/profile-edit", auth.requireLogin, (req, res, next) => {
 
 // DELETE
 router.post("/profile-delete", auth.requireLogin, (req, res, next) => {
-  User.findById({ _id: req.session.userId}, function(err, user) {
-    if (err) { console.error(err) };
-    if (req.body.userDelete === user.username ) {
+  User.findById({ _id: req.session.userId }, function(err, user) {
+    if (err) {
+      console.error(err);
+    }
+    if (req.body.userDelete === user.username) {
       User.findByIdAndDelete({ _id: req.session.userId }, function(err, user) {
         if (err) {
           console.error(err);
@@ -61,18 +63,20 @@ router.post("/profile-edit", auth.requireLogin, (req, res, next) => {
 
 // FIRST TIME WELCOME DISPLAY
 
-router.get('/welcome', (req, res, next) => {
-  res.render('users/welcome');
+router.get("/welcome", (req, res, next) => {
+  res.render("users/welcome");
 });
 
 // USERS create new
 router.post("/new", async (req, res, next) => {
-
   const isDouble = await User.findOne({ username: req.body.username });
   if (isDouble) {
-    res.render('Username already taken');
-  }
- 
+    const bajs = {
+      title: 'That username is already taken'
+    };
+    res.render('users/new', { bajs: bajs });
+  } else {
+
   const user = new User(req.body);
 
   time = moment().format("MMMM Do YYYY, HH:mm:ss a");
@@ -80,8 +84,10 @@ router.post("/new", async (req, res, next) => {
 
   user.save((err, user) => {
     if (err) console.log(`There was a problem creating a new user: ${err}`);
+    });
+    res.redirect("welcome");
+
+  }
   });
-  res.redirect("welcome");
-});
 
 module.exports = router;

@@ -54,7 +54,6 @@ router.post("/", auth.requireLogin, (req, res, next) => {
       post.author = user.username;
       post.authorPic = user.picLink;
       post.room = room;
-      user.nrPosts += parseInt(1);
 
       time = moment().format("MMMM Do YYYY, HH:mm:ss a");
       post.createdAt = time.substr(0, 26);
@@ -64,15 +63,9 @@ router.post("/", auth.requireLogin, (req, res, next) => {
           console.error(err);
         }
 
-        user.save(function(err, user) {
-          if (err) {
-            console.error(err);
-          }
-
           return res.redirect(`/rooms/${room._id}`);
         });
       });
-    });
   });
 });
 
