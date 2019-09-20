@@ -5,7 +5,7 @@ const Room = require("../models/Room");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const User = require("../models/User");
-const moment = require('moment');
+const moment = require("moment");
 
 // NEW COMMENT
 router.get("/new", auth.requireLogin, (req, res, next) => {
@@ -48,7 +48,7 @@ router.post("/", auth.requireLogin, (req, res, next) => {
           if (err) {
             console.error(err);
           }
-          time = moment().format('MMMM Do YYYY, HH:mm:ss a');
+          time = moment().format("MMMM Do YYYY, HH:mm:ss a");
           comment.createdAt = time.substr(0, 26);
 
           comment.save(function(err, comment) {
@@ -56,9 +56,11 @@ router.post("/", auth.requireLogin, (req, res, next) => {
               console.error(err);
             }
 
-            return res.redirect(`/rooms/${req.params.roomId}/posts/show/${req.params.postId}`);
+              return res.redirect(
+                `/rooms/${req.params.roomId}/posts/show/${req.params.postId}`
+              );
+            });
           });
-        });
       });
     });
   });

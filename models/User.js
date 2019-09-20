@@ -37,7 +37,11 @@ const UserSchema = new Schema({
   picLink: {
     type: String,
     default: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg'
-  }
+  },
+  nrPosts: {
+    type: Number,
+    default: 0
+  },
 });
 
 UserSchema.pre("save", function(next) {

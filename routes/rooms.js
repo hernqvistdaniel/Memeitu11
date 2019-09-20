@@ -12,13 +12,15 @@ const posts = require('./posts');
 // INDEX ROOMS
 router.get('/', auth.requireLogin, (req, res, next) => {
   Room.find({}, 'topic', function(err, rooms) {
-    User.findById({ _id: req.session.userId }, function(err, user) {
+    User.find().sort({ nrPosts: -1 }).exec(function(err, users) {
       if (err) { console.error(err) };
+      if (users.length = 3) {
       Post.find({ room: rooms }).populate('posts').sort({ points: -1 }).exec(function(err, posts) {
         if (posts.length = 3) {
-          res.render('rooms/index', { rooms: rooms, posts: posts, user: user });
+          res.render('rooms/index', { rooms: rooms, posts: posts, users: users });
         }
       });
+    }
     });
   });
 });

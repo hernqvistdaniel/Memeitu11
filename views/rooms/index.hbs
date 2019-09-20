@@ -1,43 +1,79 @@
-<div class="mt-3 mb-2 col-md-12 justify-content-center row">
-  <h4>Rooms:</h4>
-</div>
+<div class="col-md-12 justify-content-between row mt-4">
+
+  <div class="col-md-4 text-center column justify-content-center">
+
+    <div class="mt-3 mb-2">
+      <h4>Rooms</h4>
+    </div>
+
+    <div class="mb-3">
+      <ul class="list-group">
+        {{#each rooms as |room|}}
+        <a href="/rooms/{{room.id}}">
+          <li class="list-group-item mb-2">
+            <p><b>{{room.topic}}</b></p>
+          </li>
+        </a>
+        {{/each}}
+      </ul>
+    </div>
+
+  </div>
 
 
-<div class="mb-3 col-md-12 justify-content-center row">
-  <ul class="list-group col-md-4">
-    {{#each rooms as |room|}}
-
-    <a href="/rooms/{{room.id}}">
-      <li class="list-group-item d-flex justify-content-center align-items-center mb-2">
-        <span><b>{{room.topic}}</b></span>
-      </li>
-    </a>
-
-    {{/each}}
-  </ul>
-</div>
-
-<div class="justify-content-center col-md-12 row">
+  {{!-- <div class="justify-content-center col-md-4 row">
   <b>
     <p class="mt-2">Or create a new one <u><a href="/rooms/new">here!</a></u></p>
   </b>
+</div> --}}
+
+  <div class="col-md-4 text-center column justify-content-center">
+
+    <div class="mt-3 mb-2">
+      <h4>Top Providers</h4>
+    </div>
+
+    <div class="mb-3">
+      <ul class="list-group">
+        {{#each users as |user|}}
+        <a href="">
+          <li class="list-group-item mb-2">
+            <div class="row justify-content-center">
+            <p><b>{{user.username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">{{user.nrPosts}}</p> points</p>
+            </div>
+          </li>
+        </a>
+        {{/each}}
+      </ul>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-4 text-center column justify-content-center">
+
+    <div class="mt-3 mb-2">
+      <h4>Top Posts</h4>
+    </div>
+
+    <div class="mb-3">
+      <ul class="list-group">
+        {{#each posts as |post|}}
+        <a href="/rooms/{{room.id}}/posts/show/{{post.id}}">
+          <li class="list-group-item mb-2">
+            <div class="row justify-content-between">
+            <p><b>{{post.subject}}</b> <i> - by: {{post.author}}</i></p>
+            <p class="badge badge-primary badge-pill">{{post.points}}</p>
+            </div>
+          </li>
+        </a>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
 </div>
 
-<div class="justify-content-center col-md-12 row">
-  <h4 class="mt-2 mb-2">Top Posts:</h4>
-</div>
 
-<div class="col-md-12 justify-content-center row">
-  <ul class="list-group col-md-4">
-    {{#each posts as |post|}}
 
-    <a href="/rooms/{{room.id}}/posts/show/{{post.id}}">
-      <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-        <p><b>{{post.subject}}</b> <i> - by: {{post.author}}</i></p>
-        <span class="badge badge-primary badge-pill">{{post.points}}</span>
-      </li>
-    </a>
-    
-    {{/each}}
-  </ul>
 </div>

@@ -1,6 +1,6 @@
-<div class="row justify-content-center mt-5">
+<div class="row justify-content-center mt-4">
   <div class="col-10">
-    <div class="card mb-3 mt-5">
+    <div class="card mb-3">
       <div class="card-header">
         <h3 class="text-center">{{post.subject}}</h3>
         <div class="row mr-4 ml-4 justify-content-center">
@@ -60,34 +60,39 @@
         </div>
       </div>
     </div>
+
+    
     {{#each post.comments as |comment|}}
-   
-      <div class="row col-10">
-      <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
-      <b class="mr-2">{{comment.author}}</b>
-      <p class="text-muted"><i>{{comment.createdAt}}</i></p>
-    </div>
-    <div class="row col-10 ml-3">
-      <p class="comment"> {{comment.body}}</p>
-    </div>
-    <div class="row col-10">
-      {{!-- {{#ifCond user.username comment.author}}
+    <ul class="col-md-12">
+      <li>
+        <div class="row col-md-12">
+          <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
+          <b class="mr-2">{{comment.author}}</b>
+          <p class="text-muted"><i>{{comment.createdAt}}</i></p>
+        </div>
+        <p class="comment ml-4"> {{comment.body}}</p>
+      </li>
+    </ul>
+    {{!-- <div class="row col-10">
+      {{#ifCond user.username comment.author}}
       <p class="ml-3 badge badge-success badge-pill">edit</p>
       <p class="ml-1 badge badge-danger badge-pill">delete</p>
-    {{/ifCond}} --}}
-    </div>
+    {{/ifCond}}
+    </div> --}}
 
     {{/each}}
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-md-center mt-2">
       <div class="col-12">
-        <form action="/posts/{{post.id}}/comments" method="post" id="new-comment-form">   
+        <form action="/posts/{{post.id}}/comments" method="post" id="new-comment-form">
           <label for="comment">New Comment</label>
-            <textarea type="text" maxlength="200" autofocus="autofocus" name="body" class="form-control" rows="1" id="comment-body"
-              placeholder="Comment here" form="new-comment-form"></textarea>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
+          <textarea type="text" maxlength="200" name="body" class="form-control" rows="1"
+            id="comment-body" placeholder="Comment here" form="new-comment-form"></textarea>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </form>
     </div>
+
+  
   </div>
 </div>

@@ -2,6 +2,10 @@ html {
   overflow-y: scroll;
 }
 
+ul {
+  list-style: none;
+}
+
 *, a:link, a:visited {
   text-decoration: none;
 }
@@ -31,7 +35,7 @@ li {
 }
 
 li:hover {
-  background-color: #DCDCDC;
+  background-color: #F2F2F2;
 }
 
 .snyggForm {
