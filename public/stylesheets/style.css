@@ -102,3 +102,9 @@ li:hover {
 .comment {
   font-size: 1.2em;
 }
+
+.errorMsg {
+  border: 1px solid red;
+  font-weight: bold;
+  color: red;
+}
