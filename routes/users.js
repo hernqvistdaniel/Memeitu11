@@ -71,10 +71,8 @@ router.get("/welcome", (req, res, next) => {
 router.post("/new", async (req, res, next) => {
   const isDouble = await User.findOne({ username: req.body.username });
   if (isDouble) {
-    const bajs = {
-      title: 'That username is already taken'
-    };
-    res.render('users/new', { bajs: bajs });
+    const usernameTaken = 'That username is already taken, try another one!'
+    res.render('users/new', { usernameTaken: usernameTaken });
   } else {
 
   const user = new User(req.body);
