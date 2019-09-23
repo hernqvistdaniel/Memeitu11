@@ -45,8 +45,15 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
   return options.inverse(this);
 });
 
-Handlebars.registerHelper('paginate', paginate);
+Handlebars.registerHelper('exists', function(v1, v2, options) {
+  if (v1.indexOf(v2) !== -1) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 
+Handlebars.registerHelper('paginate', paginate);
+Handlebars.registerPartials(__dirname + '/views/partials');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

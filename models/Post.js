@@ -33,7 +33,8 @@ const PostSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Comment'
     }
-  ]
+  ],
+  usersVoted: []
 });
 
 module.exports = mongoose.model('Post', PostSchema);

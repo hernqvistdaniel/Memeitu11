@@ -97,6 +97,7 @@ router.post("/show/:id/delete", auth.requireLogin, (req, res, next) => {
 router.post("/:id", auth.requireLogin, (req, res, next) => {
   Post.findById(req.params.id, function(err, post) {
     post.points += parseInt(req.body.points);
+    post.usersVoted.push(req.session.userId);
 
     post.save(function(err, post) {
       if (err) {

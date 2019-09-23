@@ -39,6 +39,10 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   },
+  nrPosts: {
+    type: Number,
+    default: 0
+  },
   picLink: {
     type: String,
     default: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg'

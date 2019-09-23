@@ -44,22 +44,11 @@
           <p><a href="{{post.link}}" target="_blank">{{post.link}}</a></p>
       </div>
 
-      <div class="card-footer text-muted text-right">
-
-        <div class="btn-group btn-group-sm footerBtns">
-          <h4 class="points-span mr-3">{{post.points}} points </h4>
-          <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
-            <input type="hidden" name="points" id="post-points" value="-1">
-            <button type="submit" class="downvote-button btn btn-sm btn-danger">-</button>
-          </form>
-
-          <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
-            <input type="hidden" name="points" id="post-points" value="1">
-            <button type="submit" class="upvote-button btn btn-sm btn-success">+</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    {{#ifCond post.author user.username}}
+      {{> notvotes}}
+      {{else}}
+      {{> votes }} 
+    {{/ifCond}}
 
     
     {{#each post.comments as |comment|}}
