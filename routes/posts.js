@@ -26,6 +26,10 @@ router.get("/show/:id", auth.requireLogin, (req, res, next) => {
       console.error(err);
     }
     Post.findById(req.params.id)
+      .populate({
+        path: "author",
+        model: 'User'
+      })
       .populate({ 
         path: "comments", 
         populate: { 
@@ -34,7 +38,7 @@ router.get("/show/:id", auth.requireLogin, (req, res, next) => {
         }
       })
       .exec(function(err, post) {
-        console.log(post);
+        
         if (err) {
           console.error(err);
         }

@@ -46,7 +46,6 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
 });
 
 Handlebars.registerHelper('exists', function(v1, v2, options) {
-  console.log(v1, v2)
   if (v1.indexOf(v2) !== -1) {
     return options.fn(this);
   }
