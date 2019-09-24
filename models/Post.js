@@ -12,6 +12,9 @@ const PostSchema = new Schema({
   },
   img: String,
   link: String,
+  authorId: {
+    type: String
+  },
   author: {
     type: String
   },

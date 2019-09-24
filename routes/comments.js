@@ -24,7 +24,7 @@ router.get("/new", auth.requireLogin, (req, res, next) => {
   });
 });
 
-// SAVE POST
+// SAVE COMMENT
 router.post("/", auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.roomId, function(err, room) {
     if (err) {
@@ -41,8 +41,21 @@ router.post("/", auth.requireLogin, (req, res, next) => {
 
         let comment = new Comment(req.body);
         post.comments.push(comment);
-        comment.author = user.username;
         comment.authorPic = user.picLink;
+        comment.author = user;
+
+        let conditions = { _id: req.session.userId },
+          update = { $push: { comments: comment } },
+          options = { multi: true };
+
+        User.update(conditions, update, options, callback);
+
+        function callback(err, numAffected) {
+          if (err) {
+            console.error(err);
+          }
+          console.log(numAffected);
+        }
 
         post.save(function(err, post) {
           if (err) {
@@ -56,11 +69,11 @@ router.post("/", auth.requireLogin, (req, res, next) => {
               console.error(err);
             }
 
-              return res.redirect(
-                `/rooms/${req.params.roomId}/posts/show/${req.params.postId}`
-              );
-            });
+            return res.redirect(
+              `/rooms/${req.params.roomId}/posts/show/${req.params.postId}`
+            );
           });
+        });
       });
     });
   });

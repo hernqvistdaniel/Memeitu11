@@ -54,9 +54,23 @@ router.post("/", auth.requireLogin, (req, res, next) => {
       post.author = user.username;
       post.authorPic = user.picLink;
       post.room = room;
+      post.authorId = req.session.userId;
 
       time = moment().format("MMMM Do YYYY, HH:mm:ss a");
       post.createdAt = time.substr(0, 26);
+
+      let conditions = { _id: req.session.userId },
+          update = { $push: { posts: post } },
+          options = { multi: true };
+
+        User.update(conditions, update, options, callback);
+
+        function callback(err, numAffected) {
+          if (err) {
+            console.error(err);
+          }
+          console.log(numAffected);
+        }
 
       post.save(function(err, post) {
         if (err) {

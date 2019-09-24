@@ -11,13 +11,17 @@ const posts = require('./posts');
 
 // INDEX ROOMS
 router.get('/', auth.requireLogin, (req, res, next) => {
+  
+  User.find({}, function(err, users) {
+
   Room.find({}, 'topic', function(err, rooms) {
 
       Post.find({ room: rooms }).populate('posts').sort({ points: -1 }).exec(function(err, posts) {
         if (posts.length = 3) {
-          res.render('rooms/index', { rooms: rooms, posts: posts });
+          res.render('rooms/index', { rooms: rooms, posts: posts, users: users });
         }
       });
+    });
   });
 });
 

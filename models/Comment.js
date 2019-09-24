@@ -8,7 +8,7 @@ const CommentSchema = new Schema({
     maxlength: 200
   },
   author: {
-    type: String
+    type: Schema.Types.ObjectId, ref: 'User'
   },
   authorPic: {
     type: String
