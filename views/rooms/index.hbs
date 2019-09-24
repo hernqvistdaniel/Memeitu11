@@ -1,12 +1,11 @@
-<div class="col-md-12 justify-content-between row mt-4">
-
-  <div class="col-md-4 text-center column justify-content-center">
+<div class="col-md-12 justify-content-between text-center column mt-4 mb-5">
+  <div class="col-md-12 text-center column justify-content-center">
 
     <div class="mt-3 mb-2">
       <h4>Rooms</h4>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 col-md-12  d-flex column justify-content-center">
       <ul class="list-group">
         {{#each rooms as |room|}}
         <a href="/rooms/{{room.id}}">
@@ -19,6 +18,14 @@
     </div>
 
   </div>
+  <div class="mb-3 col-md-12  d-flex column justify-content-center">
+    <b>
+      <p class="mt-2">Or create a new one <u><a href="/rooms/new">here!</a></u></p>
+    </b>
+  </div>
+</div>
+
+<div class="col-md-12 justify-content-between row mt-5">
 
 
   <div class="col-md-4 text-center column justify-content-center">
@@ -33,8 +40,34 @@
         <a href="">
           <li class="list-group-item mb-2">
             <div class="row justify-content-center">
-              <p><b>{{user.username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">{{#each user}}{{posts.length}}{{/each}}</p>
-                points</p>
+              <p><b>{{user.username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
+                  {{#each user}}{{posts.length}}{{/each}}</p>
+                posts.</p>
+            </div>
+          </li>
+        </a>
+        {{/each}}
+      </ul>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-4 text-center column justify-content-center">
+
+    <div class="mt-3 mb-2">
+      <h4>Top Commenters</h4>
+    </div>
+
+    <div class="mb-3">
+      <ul class="list-group">
+        {{#each users as |user|}}
+        <a href="">
+          <li class="list-group-item mb-2">
+            <div class="row justify-content-center">
+              <p><b>{{user.username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
+                  {{#each user}}{{comments.length}}{{/each}}</p>
+                comments</p>
             </div>
           </li>
         </a>
@@ -56,9 +89,13 @@
         {{#each posts as |post|}}
         <a href="/rooms/{{room.id}}/posts/show/{{post.id}}">
           <li class="list-group-item mb-2">
-            <div class="row justify-content-between">
-              <p><b>{{post.subject}}</b> <i> - by: {{post.author}}</i></p>
-              <p class="badge badge-primary badge-pill">{{post.points}}</p>
+            <div class="row justify-content-center">
+              <div class="row mr-2 ml-2">
+                <p><b>{{post.subject}}</b> <i> - by: {{post.author}}</i></p>
+              </div>
+              <div class="row mr-2 ml-2">
+                <p>with<p class="badge badge-primary badge-pill">{{post.points}}</p> points</p>
+              </div>
             </div>
           </li>
         </a>
@@ -68,12 +105,5 @@
   </div>
 
 </div>
-<div class="justify-content-center col-md-4 row">
-  <b>
-    <p class="mt-2">Or create a new one <u><a href="/rooms/new">here!</a></u></p>
-  </b>
-</div>
-
-
 
 </div>
