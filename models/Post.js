@@ -16,10 +16,7 @@ const PostSchema = new Schema({
     type: String
   },
   author: {
-    type: String
-  },
-  authorPic: {
-    type: String
+    type: Schema.Types.ObjectId, ref: 'User'
   },
   room: {
     type: Schema.Types.ObjectId, ref: 'Room'

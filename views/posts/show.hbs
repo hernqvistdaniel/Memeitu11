@@ -4,7 +4,7 @@
       <div class="card-header">
         <h3 class="text-center">{{post.subject}}</h3>
         <div class="row mr-4 ml-4 justify-content-center">
-          <p class="text-right mr-4"><i>Author: {{post.author}}</i></p>
+          <p class="text-right mr-4"><i>Author:</i></p>
           <img class="text-right mr-4" src="{{post.authorPic}}" height="20px" alt="profile picture" />
           <p class="text-right mr-4"><i>{{post.createdAt}}</i></p>
         </div>
@@ -56,7 +56,7 @@
       <li>
         <div class="row col-md-12">
           <img class="mr-2" src="{{comment.authorPic}}" height="20px" alt="profile picture" />
-          <b class="mr-2">{{comment.author}}</b>
+          <b class="mr-2">{{comment.author.username}}</b>
           <p class="text-muted"><i>{{comment.createdAt}}</i></p>
         </div>
         <p class="comment ml-4"> {{comment.body}}</p>

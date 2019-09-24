@@ -26,8 +26,15 @@ router.get("/show/:id", auth.requireLogin, (req, res, next) => {
       console.error(err);
     }
     Post.findById(req.params.id)
-      .populate("comments")
+      .populate({ 
+        path: "comments", 
+        populate: { 
+          path: 'author',
+          model: 'User'
+        }
+      })
       .exec(function(err, post) {
+        console.log(post);
         if (err) {
           console.error(err);
         }
@@ -51,8 +58,7 @@ router.post("/", auth.requireLogin, (req, res, next) => {
         console.error(err);
       }
       let post = new Post(req.body);
-      post.author = user.username;
-      post.authorPic = user.picLink;
+      post.author = user;
       post.room = room;
       post.authorId = req.session.userId;
 

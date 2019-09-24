@@ -41,18 +41,21 @@ const UserSchema = new Schema({
   },
   posts: [
     {
-    type: Schema.Types.ObjectId, ref: 'Post'
-  }
-],
+      type: Schema.Types.ObjectId,
+      ref: "Post"
+    }
+  ],
   picLink: {
     type: String,
-    default: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg'
+    default:
+      "https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg"
   },
   comments: [
     {
-    type: Schema.Types.ObjectId, ref: 'Comment'
-  }
-],
+      type: Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+  ]
 });
 
 UserSchema.pre("save", function(next) {
@@ -67,24 +70,23 @@ UserSchema.pre("save", function(next) {
 });
 
 UserSchema.statics.authenticate = function(username, password, next) {
-  User.findOne({ username: username })
-    .exec(function (err, user) {
-      if (err) {
-        return next(err);
-      } else if (!user) {
-        let err = new Error('User not found.');
-        err.status = 401;
-        return next(err);
+  User.findOne({ username: username }).exec(function(err, user) {
+    if (err) {
+      return next(err);
+    } else if (!user) {
+      let err = new Error("User not found.");
+      err.status = 401;
+      return next(err);
+    }
+    bcrypt.compare(password, user.password, function(err, result) {
+      if (result === true) {
+        return next(null, user);
+      } else {
+        return next();
       }
-      bcrypt.compare(password, user.password, function (err, result) {
-        if (result === true) {
-          return next(null, user);
-        } else {
-          return next();
-        }
-      });
     });
-}
+  });
+};
 
 const User = mongoose.model("User", UserSchema);
 

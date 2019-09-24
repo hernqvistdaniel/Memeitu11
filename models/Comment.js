@@ -10,9 +10,6 @@ const CommentSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId, ref: 'User'
   },
-  authorPic: {
-    type: String
-  },
   createdAt: {
     type: String,
   },

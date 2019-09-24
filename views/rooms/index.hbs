@@ -36,12 +36,12 @@
 
     <div class="mb-3">
       <ul class="list-group">
-        {{#each users as |user|}}
+        {{#each topProviders as |user|}}
         <a href="">
           <li class="list-group-item mb-2">
             <div class="row justify-content-center">
-              <p><b>{{user.username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
-                  {{#each user}}{{posts.length}}{{/each}}</p>
+              <p><b>{{user.author.username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
+                  {{user.total}}</p>
                 posts.</p>
             </div>
           </li>
@@ -87,7 +87,7 @@
     <div class="mb-3">
       <ul class="list-group">
         {{#each posts as |post|}}
-        <a href="/rooms/{{room.id}}/posts/show/{{post.id}}">
+        <a href="/rooms/{{post.room._id}}/posts/show/{{post.id}}">
           <li class="list-group-item mb-2">
             <div class="row justify-content-center">
               <div class="row mr-2 ml-2">
