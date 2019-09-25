@@ -39,11 +39,23 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   },
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Post"
+    }
+  ],
   picLink: {
     type: String,
     default:
       "https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg"
-  }
+  },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+  ]
 });
 
 UserSchema.pre("save", function(next) {
