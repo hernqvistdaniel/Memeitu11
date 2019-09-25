@@ -42,12 +42,6 @@ router.post('/login', (req, res, next) => {
   });
 });
 
-// TEST
-router.get('/test', (req, res, next) => {
-  Comment.find((err, comment) => {
-    console.log(comment);
-  });
-});
 
 // LOGOUT
 router.get('/logout', (req, res, next) => {

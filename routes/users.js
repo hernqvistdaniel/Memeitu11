@@ -3,6 +3,8 @@ const router = express.Router();
 const User = require("../models/User");
 const auth = require("./helpers/auth");
 const moment = require("moment");
+const Comment = require("../models/Comment");
+const Post = require('../models/Post');
 
 // USERS new
 router.get("/new", (req, res, next) => {
@@ -12,10 +14,14 @@ router.get("/new", (req, res, next) => {
 // PROFILE VIEW
 router.get("/profile", auth.requireLogin, (req, res, next) => {
   User.findById({ _id: req.session.userId }, function(err, user) {
-    if (err) {
-      console.error(err);
-    }
-    res.render("users/profile", { user: user });
+    Comment.find({ author: req.session.userId }, function(err, comments) {
+      Post.find({ author: req.session.userId }, function(err, posts) {
+        if (err) {
+          console.error(err);
+        }
+        res.render("users/profile", { user: user, comments: comments, posts: posts });
+      });
+    });
   });
 });
 
@@ -71,21 +77,19 @@ router.get("/welcome", (req, res, next) => {
 router.post("/new", async (req, res, next) => {
   const isDouble = await User.findOne({ username: req.body.username });
   if (isDouble) {
-    const usernameTaken = 'That username is already taken, try another one!'
-    res.render('users/new', { usernameTaken: usernameTaken });
+    const usernameTaken = "That username is already taken, try another one!";
+    res.render("users/new", { usernameTaken: usernameTaken });
   } else {
+    const user = new User(req.body);
 
-  const user = new User(req.body);
+    time = moment().format("MMMM Do YYYY, HH:mm:ss a");
+    user.createdAt = time.substr(0, 26);
 
-  time = moment().format("MMMM Do YYYY, HH:mm:ss a");
-  user.createdAt = time.substr(0, 26);
-
-  user.save((err, user) => {
-    if (err) console.log(`There was a problem creating a new user: ${err}`);
+    user.save((err, user) => {
+      if (err) console.log(`There was a problem creating a new user: ${err}`);
     });
     res.redirect("welcome");
-
   }
-  });
+});
 
 module.exports = router;

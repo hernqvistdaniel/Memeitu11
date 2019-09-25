@@ -26,17 +26,24 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
       .sort({ points: -1 })
       .exec();
 
-    let topProviders = postsInRoom.reduce((previous, current) => {
-      const exists = previous.find((item) => item.author.id === current.author.id);
-    
-      if (!exists) {
-        return previous = [ ...previous, { author: current.author, total: 1 } ];
+    let topProviders = postsInRoom
+      .reduce((previous, current) => {
+        const exists = previous.find(
+          item => item.author.id === current.author.id
+        );
+
+        if (!exists) {
+          return (previous = [
+            ...previous,
+            { author: current.author, total: 1 }
+          ]);
         } else {
-        exists.total += 1;
-      }
-    
-      return [ ...previous];
-    }, []).sort((a, b) => a < b ? 1 : -1);
+          exists.total += 1;
+        }
+
+        return [...previous];
+      }, [])
+      .sort((a, b) => (a < b ? 1 : -1));
 
     if (postsInRoom && postsInRoom.length <= 3) {
       return res.render("rooms/index", {

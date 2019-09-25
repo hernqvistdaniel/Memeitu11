@@ -26,15 +26,18 @@ router.get("/show/:id", auth.requireLogin, (req, res, next) => {
       console.error(err);
     }
     Post.findById(req.params.id)
-      .populate({ 
-        path: "comments", 
-        populate: { 
-          path: 'author',
-          model: 'User'
+      .populate({
+        path: "author",
+        model: "User"
+      })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "author",
+          model: "User"
         }
       })
       .exec(function(err, post) {
-        console.log(post);
         if (err) {
           console.error(err);
         }
@@ -66,26 +69,26 @@ router.post("/", auth.requireLogin, (req, res, next) => {
       post.createdAt = time.substr(0, 26);
 
       let conditions = { _id: req.session.userId },
-          update = { $push: { posts: post } },
-          options = { multi: true };
+        update = { $push: { posts: post } },
+        options = { multi: true };
 
-        User.update(conditions, update, options, callback);
+      User.update(conditions, update, options, callback);
 
-        function callback(err, numAffected) {
-          if (err) {
-            console.error(err);
-          }
-          console.log(numAffected);
+      function callback(err, numAffected) {
+        if (err) {
+          console.error(err);
         }
+        console.log(numAffected);
+      }
 
       post.save(function(err, post) {
         if (err) {
           console.error(err);
         }
 
-          return res.redirect(`/rooms/${room._id}`);
-        });
+        return res.redirect(`/rooms/${room._id}`);
       });
+    });
   });
 });
 
