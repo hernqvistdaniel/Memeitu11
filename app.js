@@ -44,6 +44,16 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
   return options.inverse(this);
 });
 
+Handlebars.registerHelper('each_upto', function(ary, max, options) {
+  if(!ary || ary.length == 0)
+      return options.inverse(this);
+
+  var result = [ ];
+  for(var i = 0; i < max && i < ary.length; ++i)
+      result.push(options.fn(ary[i]));
+  return result.join('');
+});
+
 Handlebars.registerHelper('exists', function(v1, v2, options) {
   if (v1.indexOf(v2) !== -1) {
     return options.fn(this);

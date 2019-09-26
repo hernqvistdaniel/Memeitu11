@@ -61,17 +61,17 @@
 
     <div class="mb-3">
       <ul class="list-group">
-        {{#each users as |user|}}
+        {{#each_upto users 3}}
         <a href="">
           <li class="list-group-item mb-2">
             <div class="row justify-content-center">
-              <p><b>{{user.username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
-                  {{#each user}}{{comments.length}}{{/each}}</p>
+              <p><b>{{username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
+                  {{comments.length}}</p>
                 comments</p>
             </div>
           </li>
         </a>
-        {{/each}}
+        {{/each_upto}}
       </ul>
     </div>
 

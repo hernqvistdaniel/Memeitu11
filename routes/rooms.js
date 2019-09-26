@@ -22,11 +22,12 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
         populate: {
           path: "author.comments",
           model: "Comment"
-        }
+        },
       })
       .sort({ points: -1 })
       .limit(3)
       .exec();
+  
 
     let topProviders = postsInRoom
       .reduce((previous, current) => {
@@ -46,6 +47,7 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
         return [...previous];
       }, [])
       .sort((a, b) => (a < b ? 1 : -1));
+
 
       if (postsInRoom) {
       return res.render("rooms/index", {
