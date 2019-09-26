@@ -5,6 +5,7 @@ const Room = require("../models/Room");
 const Post = require("../models/Post");
 const User = require("../models/User");
 const moment = require("moment");
+const Comment = require('../models/Comment');
 
 const commentsRouter = require("./comments");
 
@@ -110,6 +111,9 @@ router.post("/:id/edit", auth.requireLogin, (req, res, next) => {
 // DELETE POST
 router.post("/show/:id/delete", auth.requireLogin, (req, res, next) => {
   Post.findByIdAndDelete(req.params.id, function(err, post) {
+    post.comments.forEach(async p => {
+      await Comment.findByIdAndDelete({ _id: p });
+    });
     if (err) {
       console.error(err);
     }
