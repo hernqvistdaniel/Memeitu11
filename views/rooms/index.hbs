@@ -37,7 +37,7 @@
     <div class="mb-3">
       <ul class="list-group">
         {{#each topProviders as |user|}}
-        <a href="">
+        <a href="/users/show/{{user.author.username}}">
           <li class="list-group-item mb-2">
             <div class="row justify-content-center">
               <p><b>{{user.author.username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
@@ -62,7 +62,7 @@
     <div class="mb-3">
       <ul class="list-group">
         {{#each_upto users 3}}
-        <a href="">
+        <a href="/users/show/{{username}}">
           <li class="list-group-item mb-2">
             <div class="row justify-content-center">
               <p><b>{{username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
