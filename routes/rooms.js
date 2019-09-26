@@ -24,6 +24,7 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
         }
       })
       .sort({ points: -1 })
+      .limit(3)
       .exec();
 
     let topProviders = postsInRoom
@@ -44,8 +45,8 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
         return [...previous];
       }, [])
       .sort((a, b) => (a < b ? 1 : -1));
-
-    if (postsInRoom && postsInRoom.length <= 3) {
+      console.log(postsInRoom);
+    if (postsInRoom) {
       return res.render("rooms/index", {
         rooms: rooms,
         posts: postsInRoom,
