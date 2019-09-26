@@ -15,7 +15,6 @@ const posts = require('./routes/posts');
 
 const paginate = require('handlebars-paginate');
 
-
 const app = express();
 
 const session = require('express-session');

@@ -44,7 +44,8 @@ router.get("/show/:id", auth.requireLogin, (req, res, next) => {
 
         res.render("posts/show", {
           post: post,
-          user: user
+          user: user,
+          req: req.session
         });
       });
   });

@@ -1,11 +1,24 @@
 <div class="card-footer text-muted text-right">
+  {{!-- {{#exists post.usersVoted req.session._id}} --}}
   <div class="btn-group btn-group-sm footerBtns">
-    {{#exists post.usersVoted post.authorId}}
-    <p>TRUE</p>
+
+    {{#exists post.usersVoted req.userId}}
+    <h4 class="points-span mr-3">{{post.points}} points </h4>
+    <p>Already voted!</p>
+
     {{else}}
-    <p>{{req.session}}</p>
-    <p>FALSE</p>
+
+    <h4 class="points-span mr-3">{{post.points}} points </h4>
+    <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
+      <input type="hidden" name="points" id="post-points" value="-1">
+      <button type="submit" class="downvote-button btn btn-sm btn-danger">-</button>
+    </form>
+
+    <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form mr-3">
+      <input type="hidden" name="points" id="post-points" value="1">
+      <button type="submit" class="upvote-button btn btn-sm btn-success">+</button>
+    </form>
+    
     {{/exists}}
   </div>
-</div>
 </div>

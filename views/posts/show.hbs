@@ -44,7 +44,8 @@
           <p><a href="{{post.link}}" target="_blank">{{post.link}}</a></p>
       </div>
 
-    {{#ifCond post.author user.username}}
+
+    {{#ifCond post.author.username user.username}}
       {{> notvotes}}
       {{else}}
       {{> votes }} 
