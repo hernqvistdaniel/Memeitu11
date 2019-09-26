@@ -1,12 +1,12 @@
 <div class="text-center justify-content-center container">
 
   <div class="mb-5">
-    <h2 class="card-title mb-3"> {{user.username}}</h2>
-    <img class="mb-3" src="{{user.picLink}}" width="100" />
-    <p><b>Name:</b> {{user.firstName}} {{user.lastName}}</p>
-    <p><b>From:</b> {{user.location}}</p>
-    <p><b>FB:</b> <a href="{{user.facebook}}" target="_blank">Link</a></p>
-    <p><b>Member since:</b> {{user.createdAt}}</p>
+    <h2 class="card-title mb-3"> {{users.username}}</h2>
+    <img class="mb-3" src="{{users.picLink}}" width="100" />
+    <p><b>Name:</b> {{users.firstName}} {{users.lastName}}</p>
+    <p><b>From:</b> {{users.location}}</p>
+    <p><b>FB:</b> <a href="{{users.facebook}}" target="_blank">Link</a></p>
+    <p><b>Member since:</b> {{users.createdAt}}</p>
     <p><b>Posts:</b> {{posts.length}}</p>
     <p><b>Comments:</b> {{comments.length}}</p>
   </div>

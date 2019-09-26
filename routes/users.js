@@ -12,14 +12,13 @@ router.get("/new", (req, res, next) => {
 });
 
 // SHOW SPECIFIC USER
-router.get("/show/:name", async (req, res, next) => {
-  user = await User.findOne({ username: req.params.name });
-  comments = await Comment.find({ author: user.id});
-  posts = await Post.find({ author: user.id });
-    console.log(user)
-    console.log(comments)
-    console.log(posts)
-    res.render("users/show", { user, comments, posts });
+router.get("/show/:name", auth.requireLogin, async (req, res, next) => {
+  user = await User.findOne({ _id: req.session.userId });
+  users = await User.findOne({ username: req.params.name });
+  comments = await Comment.find({ author: users.id});
+  posts = await Post.find({ author: users.id });
+
+    res.render("users/show", { users, comments, posts, user });
 });
 
 // PROFILE VIEW
