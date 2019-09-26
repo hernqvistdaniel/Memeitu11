@@ -8,7 +8,7 @@
   <div class="col-md-5">
     {{#each users as |user|}}
     <li class="mb-3 row justify-content-between">
-      <h3>{{user.username}}</h3>
+      <a href="/users/show/{{user.username}}"><h3>{{user.username}}</h3></a>
       <div class="row">
         <form action="" method="post">
           <button class="mr-2 btn btn-sm btn-primary">Mod</button>

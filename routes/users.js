@@ -4,11 +4,22 @@ const User = require("../models/User");
 const auth = require("./helpers/auth");
 const moment = require("moment");
 const Comment = require("../models/Comment");
-const Post = require('../models/Post');
+const Post = require("../models/Post");
 
 // USERS new
 router.get("/new", (req, res, next) => {
   res.render("users/new");
+});
+
+// SHOW SPECIFIC USER
+router.get("/show/:name", async (req, res, next) => {
+  user = await User.findOne({ username: req.params.name });
+  comments = await Comment.find({ author: user.id});
+  posts = await Post.find({ author: user.id });
+    console.log(user)
+    console.log(comments)
+    console.log(posts)
+    res.render("users/show", { user, comments, posts });
 });
 
 // PROFILE VIEW
@@ -19,7 +30,11 @@ router.get("/profile", auth.requireLogin, (req, res, next) => {
         if (err) {
           console.error(err);
         }
-        res.render("users/profile", { user: user, comments: comments, posts: posts });
+        res.render("users/profile", {
+          user: user,
+          comments: comments,
+          posts: posts
+        });
       });
     });
   });
