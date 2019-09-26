@@ -13,6 +13,7 @@ const posts = require("./posts");
 router.get("/", auth.requireLogin, async function(req, res, next) {
   try {
     const users = await User.find({});
+    const user = await User.findOne({_id: req.session.userId})
     const rooms = await Room.find({});
     const postsInRoom = await Post.find({ room: rooms })
       .populate("comments")
@@ -51,6 +52,7 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
         rooms: rooms,
         posts: postsInRoom,
         users: users,
+        user: user,
         topProviders
       });
     }
