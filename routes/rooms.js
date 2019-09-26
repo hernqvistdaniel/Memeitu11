@@ -45,8 +45,8 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
         return [...previous];
       }, [])
       .sort((a, b) => (a < b ? 1 : -1));
-      console.log(postsInRoom);
-    if (postsInRoom) {
+
+      if (postsInRoom) {
       return res.render("rooms/index", {
         rooms: rooms,
         posts: postsInRoom,
@@ -74,6 +74,7 @@ router.get("/:id", auth.requireLogin, (req, res, next) => {
       Post.find({ room: room })
         .sort({ points: -1 })
         .populate("comments")
+        .populate('author')
         .exec(function(err, posts) {
           if (err) {
             console.error(err);
