@@ -1,11 +1,7 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const auth = require("./helpers/auth");
-const Room = require("../models/Room");
-const Post = require("../models/Post");
 const User = require("../models/User");
-const commentsRouter = require("./comments");
-const moment = require('moment');
 
 // GET HOMEPAGE
 router.get('/', auth.requireLogin, (req, res, next) => {

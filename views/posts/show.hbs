@@ -4,7 +4,8 @@
       <div class="card-header">
         <h3 class="text-center">{{post.subject}}</h3>
         <div class="row mr-4 ml-4 justify-content-center">
-          <p class="text-right mr-4"><i>Author: <a href="/users/show/{{post.author.username}}"><b>{{post.author.username}}</b></a></i></p>
+          <p class="text-right mr-4"><i>Author: <a
+                href="/users/show/{{post.author.username}}"><b>{{post.author.username}}</b></a></i></p>
           <img class="text-right mr-4" src="{{post.author.picLink}}" height="20px" alt="profile picture" />
           <p class="text-right mr-4"><i>{{post.createdAt}}</i></p>
         </div>
@@ -51,41 +52,38 @@
       {{> votes }}
       {{/ifCond}}
 
+    </div>
+
+
+    {{#each post.comments as |comment|}}
+    <ul class="col-md-12">
+      <li>
+        <div class="row col-md-12">
+          <img class="mr-2" src="{{comment.author.picLink}}" height="20px" alt="profile picture">
+          <b class="mr-2"><a href="/users/show/{{comment.author.username}}">{{comment.author.username}}</a></b>
+          <p class="text-muted"><i>{{comment.createdAt}}</i></p>
+          {{> commentButtons}}
         </div>
+        <p class="comment ml-4"> {{comment.body}}</p>
+      </li>
+    </ul>
+    <div class="row col-10">
+    </div>
 
+    {{/each}}
 
-      {{#each post.comments as |comment|}}
-      <ul class="col-md-12">
-        <li>
-          <div class="row col-md-12">
-            <img class="mr-2" src="{{comment.author.picLink}}" height="20px" alt="profile picture">
-            <b class="mr-2"><a href="/users/show/{{comment.author.username}}">{{comment.author.username}}</a></b>
-            <p class="text-muted"><i>{{comment.createdAt}}</i></p>
-          </div>
-          <p class="comment ml-4"> {{comment.body}}</p>
-        </li>
-      </ul>
-      {{!-- <div class="row col-10">
-      {{#ifCond user.username comment.author}}
-      <p class="ml-3 badge badge-success badge-pill">edit</p>
-      <p class="ml-1 badge badge-danger badge-pill">delete</p>
-    {{/ifCond}}
-    </div> --}}
-
-      {{/each}}
-
-      <div class="row justify-content-md-center mt-2">
-        <div class="col-12">
-          <form action="/posts/{{post.id}}/comments" method="post" id="new-comment-form">
-            <label for="comment">New Comment</label>
-            <textarea type="text" maxlength="200" name="body" class="form-control" rows="1" id="comment-body"
-              placeholder="Comment here" form="new-comment-form"></textarea>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
+    <div class="row justify-content-md-center mt-2">
+      <div class="col-12">
+        <form action="/posts/{{post.id}}/comments" method="post" id="new-comment-form">
+          <label for="comment">New Comment</label>
+          <textarea type="text" maxlength="200" name="body" class="form-control" rows="1" id="comment-body"
+            placeholder="Comment here" form="new-comment-form"></textarea>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
+    </div>
 
 
 
-</div>
+  </div>
 </div>

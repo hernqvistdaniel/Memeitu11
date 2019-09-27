@@ -1,0 +1,5 @@
+<p>{{user.username}}{{comment.author.username}}</p>
+{{#ifCond user.username comment.author.username}}
+<p class="ml-3 badge badge-success badge-pill">edit</p>
+<p class="ml-1 badge badge-danger badge-pill">del</p>
+{{/ifCond}}
