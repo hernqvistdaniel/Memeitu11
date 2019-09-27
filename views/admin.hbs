@@ -5,20 +5,26 @@
     <h2>Users</h2>
   </div>
 
-  <div class="col-md-5">
-    {{#each users as |user|}}
-    <li class="mb-3 row justify-content-between">
-      <a href="/users/show/{{user.username}}"><h3>{{user.username}}</h3></a>
-      <div class="row">
+  <div class="col-md-12">
+    <ul class="row">
+      {{#each users as |user|}}
+
+        <div class="column text-center mr-5">
+        <a href="/users/show/{{user.username}}">
+          <img class="" src="{{user.picLink}}" width="70" />
+          <p class="">{{user.username}}</p>
+        </a>
+
         <form action="" method="post">
           <button class="mr-2 btn btn-sm btn-primary">Mod</button>
         </form>
-        <form action="" method="post">
+        <form action="/admin/{{user._id}}/delete" method="post">
           <button class="btn btn-sm btn-danger">Del</button>
         </form>
-      </div>
-    </li>
-    {{/each}}
+        </div>
+
+      {{/each}}
+    </ul>
   </div>
   {{else}}
   <h1>You are not <b>authorized</b> to see the content of this page!</h1>
