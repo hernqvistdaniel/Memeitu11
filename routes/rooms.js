@@ -15,6 +15,7 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
     const users = await User.find({});
     const user = await User.findOne({_id: req.session.userId})
     const rooms = await Room.find({});
+    const newPosts = await Post.find({}).populate({path: "author"}).sort({ createdAt: -1}).limit(3);
     const postsInRoom = await Post.find({ room: rooms })
       .populate("comments")
       .populate({
@@ -55,6 +56,7 @@ router.get("/", auth.requireLogin, async function(req, res, next) {
         posts: postsInRoom,
         users: users,
         user: user,
+        newPosts,
         topProviders
       });
     }

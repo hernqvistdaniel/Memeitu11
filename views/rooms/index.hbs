@@ -2,7 +2,7 @@
   <div class="col-md-12 text-center column justify-content-center">
 
     <div class="mt-3 mb-2">
-      <h4>Rooms</h4>
+      <h3><b>Rooms</b></h3>
     </div>
 
     <div class="mb-3 col-md-12  d-flex column justify-content-center">
@@ -19,9 +19,9 @@
 
   </div>
   <div class="mb-3 col-md-12  d-flex column justify-content-center">
-    <b>
-      <p class="mt-2">Or create a new one <u><a href="/rooms/new">here!</a></u></p>
-    </b>
+
+      <p class="mt-2">Or create a new one <a href="/rooms/new"><b><u>here!</u></b></a></p>
+
   </div>
 </div>
 
@@ -56,25 +56,27 @@
   <div class="col-md-4 text-center column justify-content-center">
 
     <div class="mt-3 mb-2">
-      <h4>Top Commenters</h4>
+      <h4>Newest Posts</h4>
     </div>
 
     <div class="mb-3">
       <ul class="list-group">
-        {{#each_upto users 3}}
-        <a href="/users/show/{{username}}">
+        {{#each newPosts as |new|}}
+        <a href="/rooms/{{new.room._id}}/posts/show/{{new.id}}">
           <li class="list-group-item mb-2">
             <div class="row justify-content-center">
-              <p><b>{{username}}</b> with <p class="badge mr-1 ml-1 badge-primary badge-pill">
-                  {{comments.length}}</p>
-                comments</p>
+              <div class="row mr-2 ml-2">
+                <p><b>{{new.subject}}</b> <i> - by: <b>{{new.author.username}}</b></i></p>
+              </div>
+              <div class="row mr-2 ml-2">
+                <p class="mr-1 ml-1">with <p class="badge badge-primary badge-pill mr-1 mr-1">{{new.points}}</p> points</p>
+              </div>
             </div>
           </li>
         </a>
-        {{/each_upto}}
+        {{/each}}
       </ul>
     </div>
-
   </div>
 
 
