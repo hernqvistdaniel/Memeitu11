@@ -28,6 +28,12 @@ const PostSchema = new Schema({
   createdAt: {
     type: String
   },
+  comments: [	
+    {	
+      type: Schema.Types.ObjectId,	
+      ref: 'Comment'	
+    }	
+  ],
   usersVoted: []
 });
 

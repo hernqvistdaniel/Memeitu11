@@ -44,11 +44,11 @@ router.post("/", auth.requireLogin, (req, res, next) => {
         comment.authorPic = user.picLink;
         comment.author = user;
 
-        let conditions = { _id: req.session.userId },
-          update = { $push: { comments: comment } },
-          options = { multi: true };
+        // let conditions = { _id: req.session.userId },
+        //   update = { $push: { comments: comment } },
+        //   options = { multi: true };
 
-        User.update(conditions, update, options, callback);
+        // User.update(conditions, update, options, callback);
 
         function callback(err, numAffected) {
           if (err) {
