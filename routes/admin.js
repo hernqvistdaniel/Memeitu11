@@ -25,4 +25,18 @@ router.post('/:id/delete', auth.requireLogin, async (req, res, next) => {
   }
 });
 
+// ADMIN MODIFYING USER
+router.post('/:id/mod', auth.requireLogin, async (req, res, next) => {
+  try {
+    const clickedUser = await User.findById(req.params.id);
+    const mod = !clickedUser.isMod;
+    await User.findByIdAndUpdate(req.params.id, {
+      isMod: mod
+    })
+  } catch(err) {
+    console.error(err);
+  }
+  res.redirect('/admin');
+});
+
 module.exports = router;

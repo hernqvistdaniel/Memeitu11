@@ -1,11 +1,8 @@
-<div class="mt-5">
+<div class="mt-5 mb-5 text-center">
   {{# if user.isAdmin}}
   <h1>Admin</h1>
-  <div class="mt-3 mb-4">
-    <h2>Users</h2>
-  </div>
 
-  <div class="col-md-12">
+  <div class="col-md-12 justify-content-center text-center">
     <ul class="row">
       {{#each users as |user|}}
 
@@ -14,12 +11,17 @@
           <img class="" src="{{user.picLink}}" width="70" />
           <p class="">{{user.username}}</p>
         </a>
-
-        <form action="" method="post">
-          <button class="mr-2 btn btn-sm btn-primary">Mod</button>
+        {{#ifCond user.isMod false}}
+        <form action="/admin/{{user._id}}/mod" method="post">
+          <button class="mr-2 mb-2 btn btn-sm btn-primary">Mod</button>
         </form>
+        {{else}}
+        <form action="/admin/{{user._id}}/mod" method="post">
+          <button class="mr-2 mb-2 btn btn-sm btn-danger">unMod</button>
+        </form>
+        {{/ifCond}}
         <form action="/admin/{{user._id}}/delete" method="post">
-          <button class="btn btn-sm btn-danger">Del</button>
+          <button class="mb-2 btn btn-sm btn-danger">Del</button>
         </form>
         </div>
 
