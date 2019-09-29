@@ -6,7 +6,7 @@
     <ul class="row">
 
       {{#each users as |user|}}
-        <div class="column text-center mr-5">
+      <div class="column text-center mr-5">
         <a href="/users/show/{{user.username}}">
           <img class="" src="{{user.picLink}}" width="70" />
           <p class="">{{user.username}}</p>
@@ -23,9 +23,9 @@
         <form action="/admin/{{user._id}}/delete" method="post">
           <button class="mb-2 btn btn-sm btn-danger">Del</button>
         </form>
-        </div>
+      </div>
       {{/each}}
-      
+
     </ul>
   </div>
   {{else}}

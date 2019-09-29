@@ -19,9 +19,9 @@
 
   </div>
   <div class="mb-3 col-md-12  d-flex column justify-content-center">
-      {{#ifCond user.isMod true}}
-      <p class="mt-2">Or create a new one <a href="/rooms/new"><b><u>here!</u></b></a></p>
-      {{/ifCond}}
+    {{#ifCond user.isMod true}}
+    <p class="mt-2">Or create a new one <a href="/rooms/new"><b><u>here!</u></b></a></p>
+    {{/ifCond}}
   </div>
 </div>
 
@@ -69,7 +69,8 @@
                 <p><b>{{new.subject}}</b> <i> - by: <b>{{new.author.username}}</b></i></p>
               </div>
               <div class="row mr-2 ml-2">
-                <p class="mr-1 ml-1">with <p class="badge badge-primary badge-pill mr-1 mr-1">{{new.points}}</p> points</p>
+                <p class="mr-1 ml-1">with <p class="badge badge-primary badge-pill mr-1 mr-1">{{new.points}}</p> points
+                </p>
               </div>
             </div>
           </li>
@@ -96,7 +97,8 @@
                 <p><b>{{post.subject}}</b> <i> - by: <b>{{post.author.username}}</b></i></p>
               </div>
               <div class="row mr-2 ml-2">
-                <p class="mr-1 ml-1">with <p class="badge badge-primary badge-pill mr-1 mr-1">{{post.points}}</p> points</p>
+                <p class="mr-1 ml-1">with <p class="badge badge-primary badge-pill mr-1 mr-1">{{post.points}}</p> points
+                </p>
               </div>
             </div>
           </li>

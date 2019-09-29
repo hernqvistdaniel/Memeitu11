@@ -18,9 +18,11 @@
 
     <div class="navbarlogo navbar-brand d-flex flex-end">
       <img class="logo" src="/images/logos/logo.png">
-      <a href="/"><h1 class="navbar-text ml-3 mt-2 center navTitle">Meme:it!</h1></a>
+      <a href="/">
+        <h1 class="navbar-text ml-3 mt-2 center navTitle">Meme:it!</h1>
+      </a>
     </div>
-    
+
     <div class="navbar-text d-flex">
       {{# if user.isAdmin}}
       <a class="navbar-brand mr-5 navItems" href="/admin">Admin</a>
@@ -28,7 +30,7 @@
       <a class="navbar-brand mr-5 navItems" href="/">Home</a>
       <a class="navbar-brand mr-5 navItems" href="/users/profile">Profile</a>
       <a class="navbar-brand mr-5 navItems" href="/rooms">Rooms</a>
-   
+
       {{# if currentUserId}}
       <a class="nav-link navItems" href="/logout">Logout</a>
       {{else}}

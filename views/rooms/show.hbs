@@ -10,15 +10,15 @@
   <ul class="list-group col-md-8">
     {{#each posts as |post|}}
     <a href="{{room._id}}/posts/show/{{post.id}}">
-    <li class="list-group-item d-flex justify-content-between">
-      <div>
-      <p class="text-left"><b>{{post.subject}}</b> <i> by: {{post.author.username}}</i></p>
-      </div>
-      <div class="row">
-      <span class="text-left mr-4">{{post.createdAt}}</span>
-      <h4 class="text-right"><span class="badge badge-primary badge-primary">{{post.points}}</span></h4>
-      </div>
-    </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <p class="text-left"><b>{{post.subject}}</b> <i> by: {{post.author.username}}</i></p>
+        </div>
+        <div class="row">
+          <span class="text-left mr-4">{{post.createdAt}}</span>
+          <h4 class="text-right"><span class="badge badge-primary badge-primary">{{post.points}}</span></h4>
+        </div>
+      </li>
     </a>
     {{/each}}
 

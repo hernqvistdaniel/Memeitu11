@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema({
   username: {
@@ -42,23 +42,23 @@ const UserSchema = new Schema({
   posts: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Post"
+      ref: 'Post'
     }
   ],
   picLink: {
     type: String,
     default:
-      "https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg"
+      'https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg'
   },
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Comment"
+      ref: 'Comment'
     }
   ]
 });
 
-UserSchema.pre("save", function(next) {
+UserSchema.pre('save', function(next) {
   let user = this;
 
   bcrypt.hash(user.password, 10, function(err, hash) {
@@ -74,7 +74,7 @@ UserSchema.statics.authenticate = function(username, password, next) {
     if (err) {
       return next(err);
     } else if (!user) {
-      let err = new Error("User not found.");
+      let err = new Error('User not found.');
       err.status = 401;
       return next(err);
     }
@@ -88,6 +88,6 @@ UserSchema.statics.authenticate = function(username, password, next) {
   });
 };
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

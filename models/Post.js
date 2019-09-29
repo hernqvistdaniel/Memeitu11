@@ -16,10 +16,12 @@ const PostSchema = new Schema({
     type: String
   },
   author: {
-    type: Schema.Types.ObjectId, ref: 'User'
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
   room: {
-    type: Schema.Types.ObjectId, ref: 'Room'
+    type: Schema.Types.ObjectId,
+    ref: 'Room'
   },
   points: {
     type: Number,
@@ -28,11 +30,11 @@ const PostSchema = new Schema({
   createdAt: {
     type: String
   },
-  comments: [	
-    {	
-      type: Schema.Types.ObjectId,	
-      ref: 'Comment'	
-    }	
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
   ],
   usersVoted: []
 });

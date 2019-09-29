@@ -1,41 +1,41 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router({ mergeParams: true });
-const auth = require("./helpers/auth");
-const Room = require("../models/Room");
-const Post = require("../models/Post");
-const User = require("../models/User");
-const moment = require("moment");
+const auth = require('./helpers/auth');
+const Room = require('../models/Room');
+const Post = require('../models/Post');
+const User = require('../models/User');
+const moment = require('moment');
 const Comment = require('../models/Comment');
 
-const commentsRouter = require("./comments");
+const commentsRouter = require('./comments');
 
 // NEW POST
-router.get("/new", auth.requireLogin, (req, res, next) => {
+router.get('/new', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.roomId, function(err, room) {
     if (err) {
       console.error(err);
     }
 
-    res.render("posts/new", { room: room });
+    res.render('posts/new', { room: room });
   });
 });
 
 // GET SPECIFIC POSTS
-router.get("/show/:id", auth.requireLogin, (req, res, next) => {
+router.get('/show/:id', auth.requireLogin, (req, res, next) => {
   User.findById({ _id: req.session.userId }, function(err, user) {
     if (err) {
       console.error(err);
     }
     Post.findById(req.params.id)
       .populate({
-        path: "author",
-        model: "User"
+        path: 'author',
+        model: 'User'
       })
       .populate({
-        path: "comments",
+        path: 'comments',
         populate: {
-          path: "author",
-          model: "User"
+          path: 'author',
+          model: 'User'
         }
       })
       .exec(function(err, post) {
@@ -43,7 +43,7 @@ router.get("/show/:id", auth.requireLogin, (req, res, next) => {
           console.error(err);
         }
 
-        res.render("posts/show", {
+        res.render('posts/show', {
           post: post,
           user: user,
           req: req.session
@@ -53,7 +53,7 @@ router.get("/show/:id", auth.requireLogin, (req, res, next) => {
 });
 
 // CREATE POST
-router.post("/", auth.requireLogin, (req, res, next) => {
+router.post('/', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.roomId, function(err, room) {
     if (err) {
       console.error(err);
@@ -67,7 +67,7 @@ router.post("/", auth.requireLogin, (req, res, next) => {
       post.room = room;
       post.authorId = req.session.userId;
 
-      time = moment().format("MMMM Do YYYY, HH:mm:ss a");
+      time = moment().format('MMMM Do YYYY, HH:mm:ss a');
       post.createdAt = time.substr(0, 26);
 
       let conditions = { _id: req.session.userId },
@@ -95,21 +95,21 @@ router.post("/", auth.requireLogin, (req, res, next) => {
 });
 
 // UPDATE POST FORM
-router.get("/:id/edit", auth.requireLogin, (req, res, next) => {
+router.get('/:id/edit', auth.requireLogin, (req, res, next) => {
   Post.findById(req.params.id, function(err, post) {
-    res.render("posts/edit", { post: post });
+    res.render('posts/edit', { post: post });
   });
 });
 
 // UPDATE POST BODY
-router.post("/:id/edit", auth.requireLogin, (req, res, next) => {
+router.post('/:id/edit', auth.requireLogin, (req, res, next) => {
   Post.findByIdAndUpdate({ _id: req.params.id }, req.body, function(err, post) {
     return res.redirect(`/rooms/${post.roomId}/posts/show/${req.params.id}`);
   });
 });
 
 // DELETE POST
-router.post("/show/:id/delete", auth.requireLogin, (req, res, next) => {
+router.post('/show/:id/delete', auth.requireLogin, (req, res, next) => {
   Post.findByIdAndDelete(req.params.id, function(err, post) {
     post.comments.forEach(async p => {
       await Comment.findByIdAndDelete({ _id: p });
@@ -122,7 +122,7 @@ router.post("/show/:id/delete", auth.requireLogin, (req, res, next) => {
 });
 
 // UPDATE POST POINTS
-router.post("/:id", auth.requireLogin, (req, res, next) => {
+router.post('/:id', auth.requireLogin, (req, res, next) => {
   Post.findById(req.params.id, function(err, post) {
     post.points += parseInt(req.body.points);
     post.usersVoted.push(req.session.userId);
@@ -137,6 +137,6 @@ router.post("/:id", auth.requireLogin, (req, res, next) => {
   });
 });
 
-router.use("/:postId/comments", commentsRouter);
+router.use('/:postId/comments', commentsRouter);
 
 module.exports = router;

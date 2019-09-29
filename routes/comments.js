@@ -1,14 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router({ mergeParams: true });
-const auth = require("./helpers/auth");
-const Room = require("../models/Room");
-const Post = require("../models/Post");
-const Comment = require("../models/Comment");
-const User = require("../models/User");
-const moment = require("moment");
+const auth = require('./helpers/auth');
+const Room = require('../models/Room');
+const Post = require('../models/Post');
+const Comment = require('../models/Comment');
+const User = require('../models/User');
+const moment = require('moment');
 
 // NEW COMMENT
-router.get("/new", auth.requireLogin, (req, res, next) => {
+router.get('/new', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.roomId, function(err, room) {
     if (err) {
       console.error(err);
@@ -19,13 +19,13 @@ router.get("/new", auth.requireLogin, (req, res, next) => {
         console.error(err);
       }
 
-      res.render("comments/new", { post: post, room: room });
+      res.render('comments/new', { post: post, room: room });
     });
   });
 });
 
 // SAVE COMMENT
-router.post("/", auth.requireLogin, (req, res, next) => {
+router.post('/', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.roomId, function(err, room) {
     if (err) {
       console.error(err);
@@ -61,7 +61,7 @@ router.post("/", auth.requireLogin, (req, res, next) => {
           if (err) {
             console.error(err);
           }
-          time = moment().format("MMMM Do YYYY, HH:mm:ss a");
+          time = moment().format('MMMM Do YYYY, HH:mm:ss a');
           comment.createdAt = time.substr(0, 26);
 
           comment.save(function(err, comment) {

@@ -8,10 +8,11 @@ const CommentSchema = new Schema({
     maxlength: 200
   },
   author: {
-    type: Schema.Types.ObjectId, ref: 'User'
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
   createdAt: {
-    type: String,
+    type: String
   },
   date: {
     type: Date,

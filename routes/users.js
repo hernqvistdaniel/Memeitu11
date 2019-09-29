@@ -1,35 +1,35 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const User = require("../models/User");
-const auth = require("./helpers/auth");
-const moment = require("moment");
-const Comment = require("../models/Comment");
-const Post = require("../models/Post");
+const User = require('../models/User');
+const auth = require('./helpers/auth');
+const moment = require('moment');
+const Comment = require('../models/Comment');
+const Post = require('../models/Post');
 
 // USERS new
-router.get("/new", (req, res, next) => {
-  res.render("users/new");
+router.get('/new', (req, res, next) => {
+  res.render('users/new');
 });
 
 // SHOW SPECIFIC USER
-router.get("/show/:name", auth.requireLogin, async (req, res, next) => {
+router.get('/show/:name', auth.requireLogin, async (req, res, next) => {
   user = await User.findOne({ _id: req.session.userId });
   users = await User.findOne({ username: req.params.name });
-  comments = await Comment.find({ author: users.id});
+  comments = await Comment.find({ author: users.id });
   posts = await Post.find({ author: users.id });
 
-    res.render("users/show", { users, comments, posts, user });
+  res.render('users/show', { users, comments, posts, user });
 });
 
 // PROFILE VIEW
-router.get("/profile", auth.requireLogin, (req, res, next) => {
+router.get('/profile', auth.requireLogin, (req, res, next) => {
   User.findById({ _id: req.session.userId }, function(err, user) {
     Comment.find({ author: req.session.userId }, function(err, comments) {
       Post.find({ author: req.session.userId }, function(err, posts) {
         if (err) {
           console.error(err);
         }
-        res.render("users/profile", {
+        res.render('users/profile', {
           user: user,
           comments: comments,
           posts: posts
@@ -40,17 +40,17 @@ router.get("/profile", auth.requireLogin, (req, res, next) => {
 });
 
 // PROFILE EDIT VIEW
-router.get("/profile-edit", auth.requireLogin, (req, res, next) => {
+router.get('/profile-edit', auth.requireLogin, (req, res, next) => {
   User.findById({ _id: req.session.userId }, function(err, user) {
     if (err) {
       console.error(err);
     }
-    res.render("users/profile-edit", { user: user });
+    res.render('users/profile-edit', { user: user });
   });
 });
 
 // DELETE
-router.post("/profile-delete", auth.requireLogin, (req, res, next) => {
+router.post('/profile-delete', auth.requireLogin, (req, res, next) => {
   User.findById({ _id: req.session.userId }, function(err, user) {
     if (err) {
       console.error(err);
@@ -60,16 +60,16 @@ router.post("/profile-delete", auth.requireLogin, (req, res, next) => {
         if (err) {
           console.error(err);
         }
-        res.redirect("/logout");
+        res.redirect('/logout');
       });
     } else {
-      res.redirect("/profile-edit");
+      res.redirect('/profile-edit');
     }
   });
 });
 
 // PROFILE EDIT SAVE
-router.post("/profile-edit", auth.requireLogin, (req, res, next) => {
+router.post('/profile-edit', auth.requireLogin, (req, res, next) => {
   User.findByIdAndUpdate({ _id: req.session.userId }, req.body, function(
     err,
     user
@@ -77,32 +77,32 @@ router.post("/profile-edit", auth.requireLogin, (req, res, next) => {
     if (err) {
       console.error(err);
     }
-    res.redirect("/users/profile/");
+    res.redirect('/users/profile/');
   });
 });
 
 // FIRST TIME WELCOME DISPLAY
 
-router.get("/welcome", (req, res, next) => {
-  res.render("users/welcome");
+router.get('/welcome', (req, res, next) => {
+  res.render('users/welcome');
 });
 
 // USERS create new
-router.post("/new", async (req, res, next) => {
+router.post('/new', async (req, res, next) => {
   const isDouble = await User.findOne({ username: req.body.username });
   if (isDouble) {
-    const usernameTaken = "That username is already taken, try another one!";
-    res.render("users/new", { usernameTaken: usernameTaken });
+    const usernameTaken = 'That username is already taken, try another one!';
+    res.render('users/new', { usernameTaken: usernameTaken });
   } else {
     const user = new User(req.body);
 
-    time = moment().format("MMMM Do YYYY, HH:mm:ss a");
+    time = moment().format('MMMM Do YYYY, HH:mm:ss a');
     user.createdAt = time.substr(0, 26);
 
     user.save((err, user) => {
       if (err) console.log(`There was a problem creating a new user: ${err}`);
     });
-    res.redirect("welcome");
+    res.redirect('welcome');
   }
 });
 

@@ -18,7 +18,14 @@ const paginate = require('handlebars-paginate');
 const app = express();
 
 const session = require('express-session');
-app.use(session({ secret: 'secret-unique-code', cookie: { maxAge: 7200000 }, resave: true, saveUninitialized: true }));
+app.use(
+  session({
+    secret: 'secret-unique-code',
+    cookie: { maxAge: 7200000 },
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,19 +45,18 @@ app.use('/posts', posts);
 
 // HANDLEBARS HELPERS
 Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-  if(v1 === v2) {
+  if (v1 === v2) {
     return options.fn(this);
   }
   return options.inverse(this);
 });
 
 Handlebars.registerHelper('each_upto', function(ary, max, options) {
-  if(!ary || ary.length == 0)
-      return options.inverse(this);
+  if (!ary || ary.length == 0) return options.inverse(this);
 
-  var result = [ ];
-  for(var i = 0; i < max && i < ary.length; ++i)
-      result.push(options.fn(ary[i]));
+  var result = [];
+  for (var i = 0; i < max && i < ary.length; ++i)
+    result.push(options.fn(ary[i]));
   return result.join('');
 });
 
@@ -80,9 +86,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mongoose.connect(process.env.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-  console.log('Connected to mongoDB!');
-});
+mongoose
+  .connect(process.env.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log('Connected to mongoDB!');
+  });
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
