@@ -25,4 +25,4 @@ Written by **Daniel Hernqvist** while studying at Chas Academy in Stockholm.
 
 Created using Nodejs, express and handlebars view engine.
 
-Not sourced, free for anyone to use.
+Not sourced, read [License.](https://github.com/hernqvistdaniel/Memeitu11/blob/master/LICENSE.md)
