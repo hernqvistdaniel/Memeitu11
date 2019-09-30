@@ -6,19 +6,20 @@ const User = require('../models/User');
 // GET HOMEPAGE
 router.get('/', auth.requireLogin, async (req, res, next) => {
   try {
-    user = await User.findById({ _id: req.session.userId });
-    users = await User.find({});
+    const user = await User.findById({ _id: req.session.userId });
+    const users = await User.find({});
+
+    res.render('admin', { user: user, users: users });
   } catch (err) {
     console.error(err);
   }
-  res.render('admin', { user: user, users: users });
 });
 
 // ADMIN USER DELETE USER
 router.post('/:id/delete', auth.requireLogin, async (req, res, next) => {
   try {
     await User.findByIdAndDelete({ _id: req.params.id });
-    const user = await User.findById(req.session.userId);
+
     res.redirect('/admin');
   } catch (err) {
     console.error(err);
@@ -33,10 +34,11 @@ router.post('/:id/mod', auth.requireLogin, async (req, res, next) => {
     await User.findByIdAndUpdate(req.params.id, {
       isMod: mod
     });
+
+    res.redirect('/admin');
   } catch (err) {
     console.error(err);
   }
-  res.redirect('/admin');
 });
 
 module.exports = router;
